@@ -1,0 +1,23 @@
+<div class="table-responsive">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" *ngFor="let header of columns" >{{header}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let group of data | paginate: config">
+      <td>{{group.fechaHora.split(" ")[0]}}</td>
+      <td>{{group.idEmpleado.nombre + " " + group.idEmpleado.apellido }}</td>
+      <td>{{group.idCliente.nombre + " " + group.idCliente.apellido }}</td>
+      <td>{{group.idTipoProducto.idCategoria.descripcion}}</td>
+      <td>{{group.idTipoProducto.descripcion}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<pagination-controls 
+  [previousLabel]="back"
+  [nextLabel]="next"
+  (pageChange)="pageChanged($event)">
+</pagination-controls>
