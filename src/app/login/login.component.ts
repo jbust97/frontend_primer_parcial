@@ -25,8 +25,9 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    this.servicioPersona.getPersonas().subscribe(
+    this.servicioPersona.getUsuariosDelSistema().subscribe(
       entity => {
+        
         this.personas = entity.lista
         let valid = false;
         for(let p of this.personas){
