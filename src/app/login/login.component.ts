@@ -30,14 +30,14 @@ export class LoginComponent implements OnInit {
         this.personas = entity.lista
         let valid = false;
         for(let p of this.personas){
-          if (p.nombre == this.usuario.nombre){
+          if (p.usuarioLogin == this.usuario.usuarioLogin){
             valid = true;
             break;
         }
       }
       if (valid){
         localStorage.setItem('session','active');
-        localStorage.setItem('userSession',this.usuario.nombre)
+        localStorage.setItem('userSession',this.usuario.usuarioLogin)
         this.router.navigate(['']);
       }else{
         this.mensaje = "El nombre de usuario no está registrado en el sistema ";
