@@ -10,7 +10,7 @@ import { ServicefichaService } from '../service/serviceficha.service';
 })
 export class FichaComponent implements OnInit {
   public data: Ficha[] = [];
-  public columns = ["Fecha","Profesional","Cliente","Categoria","Subcategoria"];
+  public columns = ["Fecha","Profesional","Cliente","Categoria","Subcategoria","Acciones"];
   config = {
       itemsPerPage: 5,
       currentPage: 1,

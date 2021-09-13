@@ -10,13 +10,15 @@ import { ServicepersonaService } from './service/servicepersona.service';
 import { FormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { FichaComponent } from './ficha/ficha.component';
+import { NuevafichaComponent } from './ficha/nuevaficha/nuevaficha.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    FichaComponent
+    FichaComponent,
+    NuevafichaComponent
   ],
   imports: [
     BrowserModule,
