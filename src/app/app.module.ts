@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { FichaComponent } from './ficha/ficha.component';
 import { NuevafichaComponent } from './ficha/nuevaficha/nuevaficha.component';
+import { BuscarempleadoComponent } from './buscarempleado/buscarempleado.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { NuevafichaComponent } from './ficha/nuevaficha/nuevaficha.component';
     LoginComponent,
     HomeComponent,
     FichaComponent,
-    NuevafichaComponent
+    NuevafichaComponent,
+    BuscarempleadoComponent,
+    
   ],
   imports: [
     BrowserModule,

@@ -24,4 +24,10 @@ export class ServicepersonaService {
     return this.http.get<listadatos<Persona>>(this.api,{params:params});
   }
 
+  getEmpleados(filtros: any):Observable<listadatos<Persona>>{
+    let params = new HttpParams()
+    .set('like','S')
+    .set('ejemplo', `{"nombre": "${filtros.nombre}", "apellido": "${filtros.apellido}","soloUsuariosDelSistema": true}`)
+    return this.http.get<listadatos<Persona>>(this.api,{params:params}); 
+  }
 }

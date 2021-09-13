@@ -2,7 +2,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Agregar Ficha</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form>
@@ -12,7 +11,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="empleado"> 
                         <div class="input-group-append">
-                            <button class="btn btn-outline-info" type="button">Buscar</button>
+                            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#empleadoModal" type="button">Buscar</button>
                         </div>
                     </div>
                 </div>
@@ -21,7 +20,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="cliente"> 
                         <div class="input-group-append">
-                            <button class="btn btn-outline-info" type="button">Buscar</button>
+                            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#clienteModal" type="button" >Buscar</button>
                         </div>
                     </div>
                 </div>
@@ -61,8 +60,33 @@
         </form>    
         </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
         <button type="button" class="btn btn-primary">Guardar</button>
     </div>
     </div>
 </div>
+
+
+
+<div class="modal fade" id="empleadoModal" tabindex="-1" aria-hidden="true">
+    <app-buscarempleado></app-buscarempleado>    
+</div>
+
+
+  <div class="modal fade" id="clienteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
