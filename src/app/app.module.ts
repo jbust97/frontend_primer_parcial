@@ -12,6 +12,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { FichaComponent } from './ficha/ficha.component';
 import { NuevafichaComponent } from './ficha/nuevaficha/nuevaficha.component';
 import { BuscarempleadoComponent } from './buscarempleado/buscarempleado.component';
+import { BuscarclienteComponent } from './buscarcliente/buscarcliente.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { BuscarempleadoComponent } from './buscarempleado/buscarempleado.compone
     FichaComponent,
     NuevafichaComponent,
     BuscarempleadoComponent,
+    BuscarclienteComponent,
     
   ],
   imports: [

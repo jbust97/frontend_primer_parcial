@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Categoria } from 'src/app/models/categoria';
+import { Ficha } from 'src/app/models/fichas';
 import { Persona } from 'src/app/models/persona';
 import { Subcategoria } from 'src/app/models/subcategoria';
 import { ServicecategoriaService } from 'src/app/service/servicecategoria.service';
@@ -11,7 +12,9 @@ import { ServicetipoproductoService } from 'src/app/service/servicetipoproducto.
   styleUrls: ['./nuevaficha.component.css']
 })
 export class NuevafichaComponent implements OnInit {
+  ficha: Ficha = new Ficha();
   empleado: Persona = new Persona();
+  cliente: Persona = new Persona();
   categorias: Categoria[] = []
   tipoProductos: Subcategoria[]= [];
   tipoProducto: Subcategoria = new Subcategoria();
@@ -27,6 +30,11 @@ export class NuevafichaComponent implements OnInit {
     this.empleado = empleado
     this.empleado.fullName = empleado.nombre + " " + empleado.apellido;
   }
+
+  seleccionarCliente(cliente: Persona){
+    this.cliente = cliente
+    this.cliente.fullName = cliente.nombre + " " + cliente.apellido;
+  }
   getCategorias(){
     this.serviceCategoria.getCategorias().subscribe((data:any)=>{
       this.categorias = data.lista;
@@ -39,4 +47,5 @@ export class NuevafichaComponent implements OnInit {
       this.tipoProductos = data.lista
     })
   }
+
 }

@@ -30,4 +30,11 @@ export class ServicepersonaService {
     .set('ejemplo', `{"nombre": "${filtros.nombre}", "apellido": "${filtros.apellido}","soloUsuariosDelSistema": true}`)
     return this.http.get<listadatos<Persona>>(this.api,{params:params}); 
   }
+
+  getClientes(filtros: any):Observable<listadatos<Persona>>{
+    let params = new HttpParams()
+    .set('like','S')
+    .set('ejemplo', `{"nombre": "${filtros.nombre}", "apellido": "${filtros.apellido}"}`)
+    return this.http.get<listadatos<Persona>>(this.api,{params:params}); 
+  }
 }
