@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Persona } from '../models/persona';
+import { ServicecategoriaService } from '../service/servicecategoria.service';
 import { ServicepersonaService } from '../service/servicepersona.service';
 
 @Component({
@@ -9,7 +10,9 @@ import { ServicepersonaService } from '../service/servicepersona.service';
   styleUrls: ['./buscarempleado.component.css']
 })
 export class BuscarempleadoComponent implements OnInit {
+  @Output() seleccionarEmpleadoEvent = new EventEmitter<Persona>()
   public data: Persona[] = [];
+  
   nombre: string = "";
   apellido: string = "";
   filtros = {
@@ -28,7 +31,7 @@ export class BuscarempleadoComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+    
   getEmpleados(){
     let currentPage = this.config.currentPage;
     let itemsPerPage = this.config.itemsPerPage;
@@ -51,6 +54,11 @@ export class BuscarempleadoComponent implements OnInit {
     this.config.currentPage = event;
     this.getEmpleados()
   }
+
+  seleccionarEmpleado(empleado: Persona){
+    this.seleccionarEmpleadoEvent.emit(empleado)
+  }
+
 }
 
 

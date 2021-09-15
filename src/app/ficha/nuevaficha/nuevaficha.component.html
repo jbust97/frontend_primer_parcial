@@ -9,7 +9,7 @@
                 <div class="form-group col-6" >
                     <label for="empleado">Empleado</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="empleado"> 
+                        <input type="text" class="form-control" id="empleado" name="empleado" readonly [(ngModel)] = "empleado.fullName"> 
                         <div class="input-group-append">
                             <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#empleadoModal" type="button">Buscar</button>
                         </div>
@@ -29,16 +29,15 @@
             <div class="row">
                 <div class="form-group col-6">
                     <label for="categoria">Categoria</label>
-                    <select class="form-select" id="categoria"> 
-                        <option>Categoria 1</option>
-                        <option>Categoria 2</option>
+                    <select class="form-select" id="categoria" name="categoria" [(ngModel)]="categoria" (ngModelChange)="getTipoProductos()"> 
+                        <option *ngFor="let categoria of categorias" [ngValue]="categoria">{{categoria.descripcion}}</option>
+                        
                     </select>
                 </div>
                 <div class="form-group col-6">
                     <label for="subcategoria">Tipo Producto</label>
-                    <select class="form-select" id="subcategoria"> 
-                        <option>Categoria 1</option>
-                        <option>Categoria 2</option>
+                    <select name="subcategoria" class="form-select" id="subcategoria" [(ngModel)]="tipoProducto"> 
+                        <option *ngFor="let tipoProducto of tipoProductos" [ngValue]="tipoProducto">{{tipoProducto.descripcion}}</option>
                     </select>
                 </div>
                 
@@ -69,7 +68,7 @@
 
 
 <div class="modal fade" id="empleadoModal" tabindex="-1" aria-hidden="true">
-    <app-buscarempleado></app-buscarempleado>    
+    <app-buscarempleado (seleccionarEmpleadoEvent)="seleccionarEmpleado($event)"></app-buscarempleado>    
 </div>
 
 
