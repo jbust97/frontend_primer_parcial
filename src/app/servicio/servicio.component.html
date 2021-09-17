@@ -1,0 +1,34 @@
+<button type="button" class="btn btn-primary" routerLink="/servicio/nuevo">Nuevo Servicio</button>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" *ngFor="let header of columns">{{header}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let group of data | paginate: config">
+                <td>{{group.fechaHora.split(" ")[0]}}</td>
+                <td>{{group.idFichaClinica.idFichaClinica}}</td>
+                <td>{{group.idFichaClinica.fechaHora.split(" ")[0]}}</td>
+                <td>{{group.idFichaClinica.idEmpleado.nombre + " " + group.idFichaClinica.idEmpleado.apellido }}</td>
+                <td>{{group.idFichaClinica.idCliente.nombre + " " + group.idFichaClinica.idCliente.apellido }}</td>
+                <td>{{group.idFichaClinica.idTipoProducto.idCategoria.descripcion}}</td>
+                <td>{{group.idFichaClinica.idTipoProducto.descripcion}}</td>
+                <td>
+                    <button class="btn  btn-outline-success">Ver Servicio</button>
+                    <button class="btn  btn-outline-success">Editar Servicio</button>
+                    
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<pagination-controls [previousLabel]="back" [nextLabel]="next" (pageChange)="pageChanged($event)">
+</pagination-controls>
+
+
+
+
+<!-- Modal -->
