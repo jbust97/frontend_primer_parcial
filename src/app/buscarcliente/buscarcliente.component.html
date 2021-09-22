@@ -35,7 +35,7 @@
                   <td>{{group.ruc}}</td>
                   <td>{{group.cedula}}</td>
                   <td>{{group.fechaNacimiento}}</td>
-                  <td><button class="btn  btn-outline-success" (click)="seleccionarCliente(group)">Seleccionar</button></td>
+                  <td><button class="btn  btn-outline-success" data-bs-dismiss="modal" (click)="seleccionarCliente(group)">Seleccionar</button></td>
                 </tr>
               </tbody>
             </table>
@@ -44,11 +44,9 @@
           id="paginationCliente"
           [previousLabel]="back"
           [nextLabel]="next"
-          (pageChange)="pageChanged($event)">
-          
+          (pageChange)="pageChanged($event)">          
       </pagination-controls>  
-      </div>
-     
+      </div>     
       <div class="modal-footer">
       </div>
     </div>
