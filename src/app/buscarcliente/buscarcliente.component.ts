@@ -24,8 +24,10 @@ export class BuscarclienteComponent implements OnInit {
   config = {
       itemsPerPage: 5,
       currentPage: 1,
-      totalItems: 1
+      totalItems: 1,
+      id: 'paginationCliente'
   }
+  
   next = "Siguiente"
   back = "Atras"
   constructor(private servicePersona: ServicepersonaService) { }
@@ -38,11 +40,11 @@ export class BuscarclienteComponent implements OnInit {
     let itemsPerPage = this.config.itemsPerPage;
     let inicio = currentPage-1;
     inicio = inicio*itemsPerPage; 
-    this.servicePersona.getClientes(this.filtros)
+    this.servicePersona.getClientes(this.filtros,itemsPerPage,inicio)
     .subscribe((data:any)=>{
      console.log(data);
-     this.data = data.lista;
      this.config.totalItems=data.totalDatos;
+     this.data = data.lista;
     });
   }
 
@@ -51,9 +53,13 @@ export class BuscarclienteComponent implements OnInit {
     this.filtros.apellido = this.apellido
     this.getClientes()
   }
-  pageChanged(event: number){
-    this.config.currentPage = event;
-    this.getClientes()
+  pageChanged(event: number) : void{
+    setTimeout(() => {
+      this.config.currentPage = event;
+      
+  }, 3);
+  this.getClientes()
+   
   }
 
   seleccionarCliente(cliente: Persona){

@@ -31,9 +31,9 @@ export class FichaComponent implements OnInit {
     inicio = inicio*itemsPerPage; 
     this.servicioFicha.getfichas(itemsPerPage,inicio)
     .subscribe((data:any)=>{
-     console.log(data);
+     
      this.data = data.lista;
-     this.config.totalItems=  data.totalDatos;
+     this.config.totalItems=data.totalDatos;
     });
   }
 

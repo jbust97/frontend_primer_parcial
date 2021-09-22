@@ -24,17 +24,21 @@ export class ServicepersonaService {
     return this.http.get<listadatos<Persona>>(this.api,{params:params});
   }
 
-  getEmpleados(filtros: any):Observable<listadatos<Persona>>{
+  getEmpleados(filtros: any,itemsPerPage: number,inicio: number):Observable<listadatos<Persona>>{
     let params = new HttpParams()
     .set('like','S')
     .set('ejemplo', `{"nombre": "${filtros.nombre}", "apellido": "${filtros.apellido}","soloUsuariosDelSistema": true}`)
+    .set('cantidad',itemsPerPage)
+    .set('inicio',inicio)
     return this.http.get<listadatos<Persona>>(this.api,{params:params}); 
   }
 
-  getClientes(filtros: any):Observable<listadatos<Persona>>{
+  getClientes(filtros: any,itemsPerPage: number, inicio: number):Observable<listadatos<Persona>>{
     let params = new HttpParams()
     .set('like','S')
     .set('ejemplo', `{"nombre": "${filtros.nombre}", "apellido": "${filtros.apellido}"}`)
+    .set('cantidad',itemsPerPage)
+    .set('inicio',inicio)
     return this.http.get<listadatos<Persona>>(this.api,{params:params}); 
   }
 }
