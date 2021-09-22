@@ -1,0 +1,92 @@
+<div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Agregar Ficha</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="row">
+                <div class="form-group col-6" >
+                    <label for="empleado">Empleado</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="empleado"> 
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#empleadoModal" type="button">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label for="cliente">Cliente</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="cliente"> 
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#clienteModal" type="button" >Buscar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="categoria">Categoria</label>
+                    <select class="form-select" id="categoria"> 
+                        <option>Categoria 1</option>
+                        <option>Categoria 2</option>
+                    </select>
+                </div>
+                <div class="form-group col-6">
+                    <label for="subcategoria">Tipo Producto</label>
+                    <select class="form-select" id="subcategoria"> 
+                        <option>Categoria 1</option>
+                        <option>Categoria 2</option>
+                    </select>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="motivoConsulta">Motivo de Consulta</label>
+                    <textarea type="text" class="form-control" id="motivoConsulta"></textarea>
+                </div>
+                <div class="form-group  col-6">
+                    <label for="diagnostico">Diagnostico</label>
+                    <textarea type="textArea" class="form-control" id="diagnostico"></textarea> 
+                </div>
+                </div>
+            <div class="form-group">
+                <label for= "observacion">Observaciones</label>
+                <textarea type="text" class="form-control" id="observacion"></textarea>
+            </div>
+        </form>    
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+    </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="empleadoModal" tabindex="-1" aria-hidden="true">
+    <app-buscarempleado></app-buscarempleado>    
+</div>
+
+
+  <div class="modal fade" id="clienteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

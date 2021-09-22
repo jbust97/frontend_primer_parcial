@@ -8,18 +8,29 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ServicepersonaService } from './service/servicepersona.service';
 import { FormsModule } from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { FichaComponent } from './ficha/ficha.component';
+import { NuevafichaComponent } from './ficha/nuevaficha/nuevaficha.component';
+import { BuscarempleadoComponent } from './buscarempleado/buscarempleado.component';
+import { ServicioComponent } from './servicio/servicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    FichaComponent,
+    NuevafichaComponent,
+    BuscarempleadoComponent,
+    ServicioComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule,
   ],
   providers: [ServicepersonaService],
   bootstrap: [AppComponent]
