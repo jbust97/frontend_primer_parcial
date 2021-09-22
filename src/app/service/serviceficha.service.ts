@@ -17,7 +17,6 @@ export class ServicefichaService {
     return this.http.get<listadatos<Ficha>>(this.api + `?cantidad=${itemsPerPage}&inicio=${inicio}`);
   }
   postficha(ficha: Ficha):Observable<Ficha>{  
-    console.log(this.api)
     console.log("headers: " + localStorage.getItem("userSession") ?? "" )
     return this.http.post<Ficha>(this.api,ficha,{
       headers:{usuario: localStorage.getItem("userSession") ?? ""}
@@ -28,4 +27,10 @@ export class ServicefichaService {
       )
     );
   } 
+  getFicha(idFichaClinica: number):Observable<Ficha>{
+    return this.http.get<Ficha>(this.api + '/' + idFichaClinica);
+  }
+  putFicha(ficha: Ficha):Observable<Ficha>{
+    return this.http.put<Ficha>(this.api,{'idFichaClinica': ficha.idFichaClinica, 'observacion': ficha.observacion});
+  }
 }

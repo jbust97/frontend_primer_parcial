@@ -13,7 +13,7 @@
       <td>{{group.idCliente.nombre + " " + group.idCliente.apellido }}</td>
       <td>{{group.idTipoProducto.idCategoria.descripcion}}</td>
       <td>{{group.idTipoProducto.descripcion}}</td>
-      <td><button class="btn  btn-outline-success">Crear Servicio</button></td>
+      <td><button class="btn  btn-outline-success"  [routerLink]="[group.idFichaClinica,'editar']">Editar</button></td>
     </tr>
   </tbody>
 </table>
