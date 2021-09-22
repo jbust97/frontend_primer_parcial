@@ -5,6 +5,7 @@ import { Ficha } from 'src/app/models/fichas';
 import { Persona } from 'src/app/models/persona';
 import { Subcategoria } from 'src/app/models/subcategoria';
 import { ServicecategoriaService } from 'src/app/service/servicecategoria.service';
+import { ServicefichaService } from 'src/app/service/serviceficha.service';
 import { ServicetipoproductoService } from 'src/app/service/servicetipoproducto.service';
 @Component({
   selector: 'app-nuevaficha',
@@ -19,14 +20,13 @@ export class NuevafichaComponent implements OnInit {
   tipoProductos: Subcategoria[]= [];
   tipoProducto: Subcategoria = new Subcategoria();
   categoria: Categoria = new Categoria()
-  constructor(private serviceCategoria: ServicecategoriaService, private serviceTipoProducto: ServicetipoproductoService) { }
+  constructor(private serviceCategoria: ServicecategoriaService, private serviceTipoProducto: ServicetipoproductoService, private serviceFicha: ServicefichaService) { }
 
   ngOnInit(): void {
     this.getCategorias()
   }
 
   seleccionarEmpleado(empleado: Persona){
-    console.log(empleado)
     this.empleado = empleado
     this.empleado.fullName = empleado.nombre + " " + empleado.apellido;
   }
@@ -42,10 +42,20 @@ export class NuevafichaComponent implements OnInit {
   }
 
   getTipoProductos(){
-    console.log("hola")
     this.serviceTipoProducto.getTipoProductos(this.categoria.idCategoria).subscribe((data:any)=>{
       this.tipoProductos = data.lista
     })
+  }
+
+  guardarFicha(){
+    this.ficha.idCliente = new Persona;
+    this.ficha.idEmpleado = new Persona;
+    this.ficha.idTipoProducto = new Subcategoria;
+    this.ficha.idTipoProducto.idTipoProducto = this.tipoProducto.idTipoProducto
+    this.ficha.idCliente.idPersona = this.cliente.idPersona
+    this.ficha.idEmpleado.idPersona = this.empleado.idPersona
+    this.serviceFicha.postficha(this.ficha).subscribe()
+    console.log(this.ficha)
   }
 
 }

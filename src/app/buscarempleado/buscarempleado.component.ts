@@ -30,6 +30,7 @@ export class BuscarempleadoComponent implements OnInit {
   constructor(private servicePersona: ServicepersonaService) { }
 
   ngOnInit(): void {
+    this.getEmpleados
   }
     
   getEmpleados(){

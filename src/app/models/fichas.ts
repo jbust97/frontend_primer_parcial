@@ -4,7 +4,7 @@ import { Subcategoria } from "./subcategoria";
 export class Ficha{
     fechaHora!: string;
     motivoConsulta!: string;
-    observaciones!: string;
+    observacion!: string;
     diagnostico!:string;
     idEmpleado!: Persona;
     idCliente!: Persona;
