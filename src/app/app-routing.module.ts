@@ -26,10 +26,10 @@ const routes: Routes = [
     component: FichaComponent
   },
   {
-
     path: "reserva",
     component: ReservaComponent
   },
+  {
     path: "servicio",
     component: ServicioComponent
   }
