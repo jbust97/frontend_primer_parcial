@@ -23,7 +23,8 @@ export class BuscarempleadoComponent implements OnInit {
   config = {
       itemsPerPage: 5,
       currentPage: 1,
-      totalItems: 1
+      totalItems: 1,
+      id: 'paginationEmpleado'
   }
   next = "Siguiente"
   back = "Atras"
@@ -38,7 +39,7 @@ export class BuscarempleadoComponent implements OnInit {
     let itemsPerPage = this.config.itemsPerPage;
     let inicio = currentPage-1;
     inicio = inicio*itemsPerPage; 
-    this.servicePersona.getEmpleados(this.filtros)
+    this.servicePersona.getEmpleados(this.filtros,itemsPerPage,inicio)
     .subscribe((data:any)=>{
      console.log(data);
      this.data = data.lista;
