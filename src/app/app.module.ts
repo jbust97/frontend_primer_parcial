@@ -13,6 +13,8 @@ import { FichaComponent } from './ficha/ficha.component';
 import { NuevafichaComponent } from './ficha/nuevaficha/nuevaficha.component';
 import { BuscarempleadoComponent } from './buscarempleado/buscarempleado.component';
 import { BuscarclienteComponent } from './buscarcliente/buscarcliente.component';
+import { ReservaComponent } from './reserva/reserva.component';
+import { ServicioComponent } from './servicio/servicio.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,9 @@ import { BuscarclienteComponent } from './buscarcliente/buscarcliente.component'
     NuevafichaComponent,
     BuscarempleadoComponent,
     BuscarclienteComponent,
+    ReservaComponent,
+    ServicioComponent,
+
     
   ],
   imports: [

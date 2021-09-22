@@ -1,0 +1,28 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col" *ngFor="let header of columns" >{{header}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let group of data | paginate: config">
+            <td>{{group.fecha}}</td>
+            <td>{{group.horaInicio}}</td>
+            <td>{{group.horaFin}}</td>
+            <td>{{group.idEmpleado.nombre + " " + group.idEmpleado.apellido }}</td>
+            <td>{{group.idCliente.nombre + " " + group.idCliente.apellido }}</td>
+            <td>
+                <button class="btn btn-outline-danger mx-2">Cancelar</button>
+                <button class="btn btn-outline-success mx-2">Modificar</button>
+                <button class="btn btn-outline-primary mx-2" routerLink="/ficha/nuevo">Nueva Ficha</button>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<pagination-controls 
+    [previousLabel]="back"
+    [nextLabel]="next"
+    (pageChange)="pageChanged($event)">
+</pagination-controls>
