@@ -12,6 +12,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { FichaComponent } from './ficha/ficha.component';
 import { NuevafichaComponent } from './ficha/nuevaficha/nuevaficha.component';
 import { BuscarempleadoComponent } from './buscarempleado/buscarempleado.component';
+import { ReservaComponent } from './reserva/reserva.component';
 import { ServicioComponent } from './servicio/servicio.component';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ServicioComponent } from './servicio/servicio.component';
     FichaComponent,
     NuevafichaComponent,
     BuscarempleadoComponent,
+    ReservaComponent,
     ServicioComponent,
     
   ],
