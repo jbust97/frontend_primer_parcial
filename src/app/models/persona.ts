@@ -2,6 +2,7 @@ export class Persona {
     idPersona!: number;
     nombre!: string;
     apellido!: string;
+    fullName!: string;
     email!: string;
     telefono!: string;
     ruc!: string;

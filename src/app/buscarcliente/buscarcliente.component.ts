@@ -5,12 +5,13 @@ import { ServicecategoriaService } from '../service/servicecategoria.service';
 import { ServicepersonaService } from '../service/servicepersona.service';
 
 @Component({
-  selector: 'app-buscarempleado',
-  templateUrl: './buscarempleado.component.html',
-  styleUrls: ['./buscarempleado.component.css']
+  selector: 'app-buscarcliente',
+  templateUrl: './buscarcliente.component.html',
+  styleUrls: ['./buscarcliente.component.css']
 })
-export class BuscarempleadoComponent implements OnInit {
-  @Output() seleccionarEmpleadoEvent = new EventEmitter<Persona>()
+export class BuscarclienteComponent implements OnInit {
+
+  @Output() seleccionarClienteEvent = new EventEmitter<Persona>()
   public data: Persona[] = [];
   
   nombre: string = "";
@@ -30,36 +31,36 @@ export class BuscarempleadoComponent implements OnInit {
   constructor(private servicePersona: ServicepersonaService) { }
 
   ngOnInit(): void {
-    this.getEmpleados
   }
     
-  getEmpleados(){
+  getClientes(){
     let currentPage = this.config.currentPage;
     let itemsPerPage = this.config.itemsPerPage;
     let inicio = currentPage-1;
     inicio = inicio*itemsPerPage; 
-    this.servicePersona.getEmpleados(this.filtros)
+    this.servicePersona.getClientes(this.filtros)
     .subscribe((data:any)=>{
      console.log(data);
      this.data = data.lista;
-     this.config.totalItems=  data.totalDatos;
+     this.config.totalItems=data.totalDatos;
     });
   }
 
   buscar(){
     this.filtros.nombre = this.nombre
     this.filtros.apellido = this.apellido
-    this.getEmpleados()
+    this.getClientes()
   }
   pageChanged(event: number){
     this.config.currentPage = event;
-    this.getEmpleados()
+    this.getClientes()
   }
 
-  seleccionarEmpleado(empleado: Persona){
-    this.seleccionarEmpleadoEvent.emit(empleado)
+  seleccionarCliente(cliente: Persona){
+    this.seleccionarClienteEvent.emit(cliente)
   }
+
+ 
 
 }
-
 
