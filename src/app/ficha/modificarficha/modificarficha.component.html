@@ -43,10 +43,28 @@
             </form>    
             </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+            <button type="button" class="btn btn-secondary" routerLink="/ficha">Volver</button>
             <button type="button" class="btn btn-primary" (click)="guardar()">Guardar</button>
         </div>
       </div>
 </div>
+<div id="servicios">
+    <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" *ngFor="let header of columns" >{{header}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let group of servicios">
+              <td>{{group.fechaHora.split(" ")[0]}}</td>
+              <td>{{group.presupuesto}}</td>
+              <td><button class="btn  btn-outline-success"  [routerLink]="[group.idServicio,'editar']">Editar</button></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+</div>
 
-
+    
