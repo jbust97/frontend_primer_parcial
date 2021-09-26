@@ -15,9 +15,11 @@ import { BuscarempleadoComponent } from './buscarempleado/buscarempleado.compone
 import { BuscarclienteComponent } from './buscarcliente/buscarcliente.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { ServicioComponent } from './servicio/servicio.component';
+import { ModificarfichaComponent } from './ficha/modificarficha/modificarficha.component';
 import { NuevaReservaComponent } from './reserva/nueva-reserva/nueva-reserva.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModificarReservaComponent } from './reserva/modificar-reserva/modificar-reserva.component';
+
 
 @NgModule({
   declarations: [
@@ -32,8 +34,7 @@ import { ModificarReservaComponent } from './reserva/modificar-reserva/modificar
     ServicioComponent,
     NuevaReservaComponent,
     ModificarReservaComponent,
-
-    
+    ModificarfichaComponent,
   ],
   imports: [
     BrowserModule,

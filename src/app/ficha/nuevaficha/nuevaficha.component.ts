@@ -55,7 +55,6 @@ export class NuevafichaComponent implements OnInit {
     this.ficha.idCliente.idPersona = this.cliente.idPersona
     this.ficha.idEmpleado.idPersona = this.empleado.idPersona
     this.serviceFicha.postficha(this.ficha).subscribe()
-    console.log(this.ficha)
   }
 
 }
