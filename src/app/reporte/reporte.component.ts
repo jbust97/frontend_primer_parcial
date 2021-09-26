@@ -25,9 +25,12 @@ type Filtro = {
   templateUrl: './reporte.component.html',
   styleUrls: ['./reporte.component.css']
 })
+
 export class ReporteComponent implements OnInit {
   public data: Servicio[] = [];
   public columns = ["Fecha", "Profesional", "Cliente","Presupuesto","Subcategoria"];
+  
+  esconder = true;
 
   categorias: Categoria [] = []
   tipoProductos: Subcategoria[] = []
@@ -37,10 +40,12 @@ export class ReporteComponent implements OnInit {
   categoria: Categoria = new Categoria()
   tipoProducto: Subcategoria = new Subcategoria()
   filtros: Filtro = {};
+  tipoReporte: string = "";
   constructor(private http: HttpClient, private servicioServicio: ServicioService,private serviceCategoria: ServicecategoriaService,private serviceTipoProducto: ServicetipoproductoService) { }
 
   ngOnInit(){
   }
+
   getServicios(){
     this.servicioServicio.getServicios(this.filtros)
     .subscribe((data:any)=>{
@@ -49,20 +54,38 @@ export class ReporteComponent implements OnInit {
     });
   }
 
+  generarReporteDetallado(): void{
+    this.tipoReporte = "detallado"
+    this.esconder = false
+    console.log("se toco el boton detallado")  
+  }
 
-  buscar(): void{
+  generarReporteBasico(): void{
+    this.tipoReporte= "basico"
+    this.esconder = false
     this.filtros.idCliente = this.cliente.idPersona
     this.filtros.idEmpleado = this.empleado.idPersona
     if (this.filtros.fechaDesde && this.filtros.fechaHasta){
       this.getServicios()  
     }else{
-      console.log("xd")
+      console.log("Agregar funcion de deshabilitar boton")
     }
   }
   //DESCARGAR EXCEL
   descargarCSV():void{
+    if (this.tipoReporte == "basico"){
+      this.basicoCSV();
+    }
+    if(this.tipoReporte == "detallado"){
+      this.detalladoCSV();
+    }
+    else{
+      console.log("llama a Hugo Fleitas")
+    }
+  }
+
+  basicoCSV():void{
     let datos:any[]=[];
-    //macumba de filas
     this.data.forEach((fila)=>{
       let row:any = {} 
       row["Fecha"]=fila.fechaHora.split(" ")[0]
@@ -76,9 +99,24 @@ export class ReporteComponent implements OnInit {
     exportadorCSV.exportColumnsToCSV(datos, "Servicios_Basicos" + new Date().toISOString().slice(0, 10) + ".xlsx" ,this.columns);
   }
 
+  detalladoCSV():void{
+    console.log("agregar la planilla detallado")
+  }
+
   //DESCARGAR PDF
   descargarPDF(): void{
-    console.log("pdf")
+    if (this.tipoReporte == "basico"){
+      this.basicoPDF();
+    }
+    if(this.tipoReporte == "detallado"){
+      console.log("agregar la detallado detallado")
+    }
+    else{
+      console.log("llama a Hugo Fleitas")
+    }
+  }
+
+  basicoPDF():void{
     var doc = new jsPDF();
     let datos:any[]=[];
     console.log(this.data)
@@ -91,10 +129,10 @@ export class ReporteComponent implements OnInit {
       row.push(fila.idFichaClinica.idTipoProducto.descripcion)
       datos.push(row)
     });
-    doc.setFontSize(12);
-    let cabecera="Reporte Basico de Servicios\n";
-    //CONTADOR DE LINEAS
+    doc.setFontSize(13).setFont('', 'bold');
+    doc.text('Reporte Basico de Servicios\n',doc.internal.pageSize.getWidth() / 2, 8, {align: 'center'}).setFontSize(11).setFont('', 'normal');
     let contadorLineas = 1;
+    let cabecera = ""
     if(this.filtros.idEmpleado){
       cabecera += "Profesional: " + this.empleado.nombreCompleto+"\n";
       contadorLineas+=1;
@@ -111,24 +149,23 @@ export class ReporteComponent implements OnInit {
       cabecera += "Fecha Fin: " + this.filtros.fechaHasta+"\n";
       contadorLineas+=1;
     }
-    doc.text(cabecera, 11, 8);
-
+    doc.text(cabecera, 11, 16); //agrega cabecera al pdf
     doc.setFontSize(11);
     doc.setTextColor(100);
     (doc as any).autoTable({
-      //MACUMBA DE POSICION
-      margin: {top:contadorLineas*10},
+      margin: {top:contadorLineas*9},
       head: [this.columns],
       body: datos,
       theme: 'plain',
       didDrawCell: (data: { column: { index: any; }; }) => {
       }
     })
-    //Se abre el pdf en una nueva linea
     doc.output('dataurlnewwindow');
-
-    //Se descarga el pdf 
     doc.save('myteamdetail.pdf');
+  }
+  
+  detalladoPDF():void{
+    console.log("agregar pdf detallado")
   }
 
   seleccionarEmpleado(empleado: Persona){

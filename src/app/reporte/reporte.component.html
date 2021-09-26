@@ -32,15 +32,16 @@
   </div>
   </form>
   
-  
   <div class="row">
-    <div class="col-md-12 text-end">
-      <button type="button" class="btn btn-info mt-2" (click)="buscar()">Generar Reporte</button>
+    <div class="col-md-10 text-end">
+      <button type="button" class="btn btn-info mt-2" [disabled]="!filtros.fechaDesde || !filtros.fechaHasta" (click)="generarReporteBasico()">Generar Reporte Basico</button>
+    </div>
+    <div class="col-md-2 text-end">
+      <button type="button" class="btn btn-info mt-2" [disabled]="!filtros.fechaDesde || !filtros.fechaHasta" (click)="generarReporteDetallado()">Generar Reporte Detallado</button>
     </div>
   </div>
   
-  
-  <div class="table-responsive">
+  <div [hidden] = "esconder" class="table-responsive">
   <table class="table">
     <thead>
       <tr>
@@ -59,7 +60,7 @@
   </table>
   </div>
     
-  <div class="row">
+  <div [hidden] = "esconder" class="row">
     <div class="col-md-11 text-end">
       <button type="button" class="btn btn-success mt-2" (click)="descargarCSV()">CSV</button>
     </div>
@@ -72,8 +73,7 @@
     <app-buscarempleado (seleccionarEmpleadoEvent)="seleccionarEmpleado($event)"></app-buscarempleado>    
   </div>
   
-  
+
   <div class="modal fade" id="clienteModal" tabindex="-1" aria-hidden="true">
    <app-buscarcliente (seleccionarClienteEvent)="seleccionarCliente($event)"></app-buscarcliente>
   </div>
-  
