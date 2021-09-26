@@ -49,16 +49,4 @@ export class NuevoServicioComponent implements OnInit {
     })
   }
 
-  guardarServicio(servicio: Partial<Servicio>){
-    console.log()
-    /*this.ficha.idCliente = new Persona;
-    this.ficha.idEmpleado = new Persona;
-    this.ficha.idTipoProducto = new Subcategoria;
-    this.ficha.idTipoProducto.idTipoProducto = this.tipoProducto.idTipoProducto
-    this.ficha.idCliente.idPersona = this.cliente.idPersona
-    this.ficha.idEmpleado.idPersona = this.empleado.idPersona
-    this.serviceFicha.postficha(this.ficha).subscribe()
-    console.log(this.ficha)*/
-  }
-
 }
