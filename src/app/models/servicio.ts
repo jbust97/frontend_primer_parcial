@@ -9,3 +9,8 @@ export class Servicio {
     observacion!: string;
     //listaDetalles!: T[];
 }
+
+export class ServicioPostBody {
+    idFichaClinica!: Partial<Ficha>;
+    observacion!: string;
+}
