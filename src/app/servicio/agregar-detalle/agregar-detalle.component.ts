@@ -12,6 +12,7 @@ import { ServicioService } from 'src/app/service/servicio.service';
 export class AgregarDetalleComponent implements OnInit {
 
   servicio: Servicio = new Servicio();
+  cantidad: number = 0;
   public presentacionProductos: PresentacionProducto[] = [];
   public presentacionProducto: PresentacionProducto = new PresentacionProducto();
 
@@ -37,7 +38,7 @@ export class AgregarDetalleComponent implements OnInit {
 
     let detalleBody = new DetallePostBody();
 
-    detalleBody.cantidad = this.servicio.observacion;
+    detalleBody.cantidad = this.cantidad;
     detalleBody.idPresentacionProducto = {
       idPresentacionProducto: this.presentacionProducto.idPresentacionProducto
     };
@@ -45,7 +46,7 @@ export class AgregarDetalleComponent implements OnInit {
       idServicio: this.servicio.idServicio
     };
 
-    this.servicioService.postServicio(servicioBody).subscribe((data: Servicio) => console.log(JSON.stringify(data)));
+    this.servicioService.postDetalle(detalleBody, this.servicio.idServicio).subscribe((data: Servicio) => console.log(JSON.stringify(data)));
   }
 
   getPresentacionProducto(){
