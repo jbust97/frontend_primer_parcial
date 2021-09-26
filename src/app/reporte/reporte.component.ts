@@ -9,6 +9,7 @@ import { Servicio } from '../models/servicio';
 import { ServicioService } from '../service/servicio.service';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+import {ExportToCSV} from "@molteni/export-csv";
 
 type Filtro = {
   fechaDesde ?: string,
@@ -58,7 +59,24 @@ export class ReporteComponent implements OnInit {
       console.log("xd")
     }
   }
+  //DESCARGAR EXCEL
+  descargarCSV():void{
+    let datos:any[]=[];
+    //macumba de filas
+    this.data.forEach((fila)=>{
+      let row:any = {} 
+      row["Fecha"]=fila.fechaHora.split(" ")[0]
+      row["Profesional"]=fila.idFichaClinica.idEmpleado.nombreCompleto
+      row["Cliente"]=fila.idFichaClinica.idCliente.nombreCompleto
+      row["Presupuesto"]=fila.presupuesto
+      row["Subcategoria"]=fila.idFichaClinica.idTipoProducto.descripcion
+      datos.push(row)
+    });
+    let exportadorCSV = new ExportToCSV(); 
+    exportadorCSV.exportColumnsToCSV(datos, "Servicios_Basicos" + new Date().toISOString().slice(0, 10) + ".xlsx" ,this.columns);
+  }
 
+  //DESCARGAR PDF
   descargarPDF(): void{
     console.log("pdf")
     var doc = new jsPDF();
@@ -71,8 +89,6 @@ export class ReporteComponent implements OnInit {
       row.push(fila.idFichaClinica.idCliente.nombreCompleto)
       row.push(fila.presupuesto)
       row.push(fila.idFichaClinica.idTipoProducto.descripcion)
-
-
       datos.push(row)
     });
     doc.setFontSize(12);
@@ -113,11 +129,6 @@ export class ReporteComponent implements OnInit {
 
     //Se descarga el pdf 
     doc.save('myteamdetail.pdf');
-  }
-  
-
-  descargarCSV(): void{
-    console.log("csv")
   }
 
   seleccionarEmpleado(empleado: Persona){
