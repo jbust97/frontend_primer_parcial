@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { listadatos } from '../models/datos';
-import { Reserva, ReservaPostBody } from '../models/reserva';
+import { Reserva, ReservaPostBody, ReservaPutBody } from '../models/reserva';
 import { base_url } from '../base_url';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,9 @@ export class ReservaService {
   constructor(private http: HttpClient) { }
 
   getReservas(itemsPerPage:number,inicio:number): Observable<listadatos<Reserva>> {
-    return this.http.get<listadatos<Reserva>>(`${this.api}stock-pwfe/reserva`)
+    let params = new HttpParams()
+    .set('ejemplo', '{"flagEstado": "R"}')
+    return this.http.get<listadatos<Reserva>>(`${this.api}stock-pwfe/reserva`, {params})
   }
 
   postReserva(reserva: ReservaPostBody): Observable<Reserva> {
@@ -38,5 +40,13 @@ export class ReservaService {
   getAgenda(idPersona: number, fecha: string): Observable<Reserva[]> {
     console.log('Obteniendo agenda');
     return this.http.get<Reserva[]>(`${this.api}stock-pwfe/persona/${idPersona}/agenda?fecha=${fecha}&disponible=S`);
+  }
+
+  getReserva(idReserva: number): Observable<Reserva> {
+    return this.http.get<Reserva>(`${this.api}stock-pwfe/reserva/${idReserva}`);
+  }
+
+  modificarReserva(reserva: ReservaPutBody): Observable<void> {
+    return this.http.put<void>(`${this.api}stock-pwfe/reserva`, reserva);
   }
 }

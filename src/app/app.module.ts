@@ -17,6 +17,7 @@ import { ReservaComponent } from './reserva/reserva.component';
 import { ServicioComponent } from './servicio/servicio.component';
 import { NuevaReservaComponent } from './reserva/nueva-reserva/nueva-reserva.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModificarReservaComponent } from './reserva/modificar-reserva/modificar-reserva.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReservaComponent,
     ServicioComponent,
     NuevaReservaComponent,
+    ModificarReservaComponent,
 
     
   ],
