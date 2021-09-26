@@ -76,7 +76,7 @@ export class ReporteComponent implements OnInit {
     if (this.tipoReporte == "basico"){
       this.basicoCSV();
     }
-    if(this.tipoReporte == "detallado"){
+    else if(this.tipoReporte == "detallado"){
       this.detalladoCSV();
     }
     else{
@@ -108,7 +108,7 @@ export class ReporteComponent implements OnInit {
     if (this.tipoReporte == "basico"){
       this.basicoPDF();
     }
-    if(this.tipoReporte == "detallado"){
+    else if(this.tipoReporte == "detallado"){
       console.log("agregar la detallado detallado")
     }
     else{
@@ -129,8 +129,8 @@ export class ReporteComponent implements OnInit {
       row.push(fila.idFichaClinica.idTipoProducto.descripcion)
       datos.push(row)
     });
-    doc.setFontSize(13).setFont('', 'bold');
-    doc.text('Reporte Basico de Servicios\n',doc.internal.pageSize.getWidth() / 2, 8, {align: 'center'}).setFontSize(11).setFont('', 'normal');
+    doc.setFontSize(13).setFont('helvetica', 'bold');
+    doc.text('Reporte Básico de Servicios\n',doc.internal.pageSize.getWidth() / 2, 8, {align: 'center'}).setFontSize(11).setFont('Helvetica','normal');
     let contadorLineas = 1;
     let cabecera = ""
     if(this.filtros.idEmpleado){
