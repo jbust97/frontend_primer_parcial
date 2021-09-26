@@ -41,7 +41,7 @@
     </div>
   </div>
   
-  <div [hidden] = "esconder" class="table-responsive">
+  <div [hidden] = "esconderBasico" class="table-responsive" label="tablaBasica">
   <table class="table">
     <thead>
       <tr>
@@ -59,8 +59,31 @@
     </tbody>
   </table>
   </div>
-    
-  <div [hidden] = "esconder" class="row">
+  
+  <div [hidden] = "esconderDetallado" class="table-responsive" label="tablaDetallada">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" *ngFor="let header of columns" >{{header}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let group of superData">
+          <td>{{group.idServicio.idServicio}}</td>
+          <td>{{group.idServicio.fechaHora.split(" ")[0]}}</td>
+          <td>{{group.idServicio.idFichaClinica.idEmpleado.nombre + " " + group.idServicio.idFichaClinica.idEmpleado.apellido }}</td>
+          <td>{{group.idServicio.idFichaClinica.idCliente.nombre + " " + group.idServicio.idFichaClinica.idCliente.apellido }}</td>
+          <td>{{group.idPresentacionProducto.existenciaProducto.precioVenta}}</td>
+          <td>{{group.cantidad}}</td>
+          <td>{{group.idPresentacionProducto.existenciaProducto.precioVenta*group.cantidad}}</td>
+          <td>{{group.idPresentacionProducto.nombre}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+      
+
+  <div [hidden] = "esconderBoton" class="row">
     <div class="col-md-11 text-end">
       <button type="button" class="btn btn-success mt-2" (click)="descargarCSV()">CSV</button>
     </div>

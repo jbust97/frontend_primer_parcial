@@ -7,9 +7,10 @@ import { ServicetipoproductoService } from '../service/servicetipoproducto.servi
 import { Component, OnInit } from '@angular/core';
 import { Servicio } from '../models/servicio';
 import { ServicioService } from '../service/servicio.service';
+import { Detalle } from '../models/detalle'
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
-import {ExportToCSV} from "@molteni/export-csv";
+import { ExportToCSV } from "@molteni/export-csv";
 
 type Filtro = {
   fechaDesde ?: string,
@@ -28,9 +29,13 @@ type Filtro = {
 
 export class ReporteComponent implements OnInit {
   public data: Servicio[] = [];
-  public columns = ["Fecha", "Profesional", "Cliente","Presupuesto","Subcategoria"];
+  public superData: Detalle[]=[];
+  public columns: string[]=[];
   
-  esconder = true;
+  // variables togleables para ocultar tablas y botones de acuerdo al formato del reporte
+  esconderDetallado = true;
+  esconderBasico = true;
+  esconderBoton = true;
 
   categorias: Categoria [] = []
   tipoProductos: Subcategoria[] = []
@@ -54,21 +59,39 @@ export class ReporteComponent implements OnInit {
     });
   }
 
+  getDetalles(){
+    this.servicioServicio.getServiciosDetallado(this.filtros)
+    .subscribe((data:any)=>{
+     console.log(data);
+     this.superData = data.lista;
+    });
+  }
+
   generarReporteDetallado(): void{
     this.tipoReporte = "detallado"
-    this.esconder = false
-    console.log("se toco el boton detallado")  
+    //funciona, no tocar
+    this.esconderDetallado = false
+    this.esconderBasico = true
+    this.esconderBoton = false
+    this.columns = ["Servicio", "Fecha", "Profesional", "Cliente","Costo unitario","Cantidad","Total","Presentacion"]
+    this.filtros.idCliente = this.cliente.idPersona
+    this.filtros.idEmpleado = this.empleado.idPersona
+    if (this.filtros.fechaDesde && this.filtros.fechaHasta){
+      this.getDetalles()  
+    }
   }
 
   generarReporteBasico(): void{
     this.tipoReporte= "basico"
-    this.esconder = false
+    //funciona, no tocar
+    this.esconderDetallado = true
+    this.esconderBasico = false
+    this.esconderBoton = false
+    this.columns = ["Fecha", "Profesional", "Cliente","Presupuesto","Subcategoria"]
     this.filtros.idCliente = this.cliente.idPersona
     this.filtros.idEmpleado = this.empleado.idPersona
     if (this.filtros.fechaDesde && this.filtros.fechaHasta){
       this.getServicios()  
-    }else{
-      console.log("Agregar funcion de deshabilitar boton")
     }
   }
   //DESCARGAR EXCEL
