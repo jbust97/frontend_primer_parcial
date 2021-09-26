@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PresentacionProducto } from '../models/presentacionProducto';
 import { Servicio } from '../models/servicio';
 import { ServicioService } from '../service/servicio.service';
 
@@ -10,6 +11,7 @@ import { ServicioService } from '../service/servicio.service';
 
 export class ServicioComponent implements OnInit {
   public data: Servicio[] = [];
+  public presentacionProducto: PresentacionProducto[] = []
   public columns = ["Fecha","Ficha", "Fecha Ficha", "Profesional","Cliente","Categoria","Subcategoria","Acciones"];
   config = {
       itemsPerPage: 5,
@@ -37,10 +39,10 @@ export class ServicioComponent implements OnInit {
     });
   }
 
-  agregarServicio(servicio: Servicio) {
-    this.servicioService.agregarServicio(servicio.idServicio)
-    .subscribe((data:any) => console.log(`Servicio ${servicio.idServicio} cancelada!`));
-    this.getServicios();
+  getPresentacionProducto(){
+    this.servicioService.getPresentacionProducto().subscribe((data:any)=>{
+      this.presentacionProducto = data.lista;
+    })
   }
 
   pageChanged(event: number){

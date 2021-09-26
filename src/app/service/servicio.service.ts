@@ -4,6 +4,7 @@ import { Servicio, ServicioPostBody } from '../models/servicio';
 import { base_url } from '../base_url';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { PresentacionProducto } from '../models/presentacionProducto';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class ServicioService {
       }
     });
   }
+
+  getPresentacionProducto():Observable<listadatos<PresentacionProducto>>{
+    return this.http.get<listadatos<PresentacionProducto>>(this.api);
+  } 
 
 
  getServicioFicha(idFichaClinica: number):Observable<listadatos<Servicio>>{
