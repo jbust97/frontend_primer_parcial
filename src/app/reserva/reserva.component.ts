@@ -37,6 +37,12 @@ export class ReservaComponent implements OnInit {
     });
   }
 
+  cancelarReserva(reserva: Reserva) {
+    this.reservaService.cancelarReserva(reserva.idReserva)
+    .subscribe((data:any) => console.log(`Reserva ${reserva.idReserva} cancelada!`));
+    this.getReservas();
+  }
+
   pageChanged(event: number){
     this.config.currentPage = event;
     this.getReservas()
