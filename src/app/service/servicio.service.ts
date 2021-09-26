@@ -16,7 +16,11 @@ export class ServicioService {
   }
   getServicio(itemsPerPage:number,inicio:number):Observable<listadatos<Servicio>>{
     return this.http.get<listadatos<Servicio>>(this.api + `?cantidad=${itemsPerPage}&inicio=${inicio}`);
-  } 
+  }
+  
+  getUnServicio(idServicio: number):Observable<Servicio>{
+    return this.http.get<Servicio>(this.api + '/' + idServicio);
+  }
 
   postServicio(servicio: ServicioPostBody): Observable<Servicio> {
     console.log('Agregando Servicio' + JSON.stringify(servicio));
