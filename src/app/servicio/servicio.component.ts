@@ -37,8 +37,8 @@ export class ServicioComponent implements OnInit {
     });
   }
 
-  cancelarServicio(servicio: Servicio) {
-    this.servicioService.cancelarServicio(servicio.idServicio)
+  agregarServicio(servicio: Servicio) {
+    this.servicioService.agregarServicio(servicio.idServicio)
     .subscribe((data:any) => console.log(`Servicio ${servicio.idServicio} cancelada!`));
     this.getServicios();
   }
