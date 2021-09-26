@@ -17,8 +17,12 @@
                 </div>
                
             </div>
-            <button class="btn btn-info" (click)="buscar()">Buscar</button>
-        </form>  
+            <div class="row">
+              <div class="col-md-12 text-end">
+                <button type="button" class="btn btn-info mt-2" (click)="buscar()">Buscar</button>
+              </div>
+            </div>
+              </form>  
         <div class="table-responsive">
             <table class="table">
               <thead>
@@ -35,7 +39,7 @@
                   <td>{{group.ruc}}</td>
                   <td>{{group.cedula}}</td>
                   <td>{{group.fechaNacimiento}}</td>
-                  <td><button class="btn  btn-outline-success" (click)="seleccionarCliente(group)">Seleccionar</button></td>
+                  <td><button class="btn  btn-outline-success" data-bs-dismiss="modal" (click)="seleccionarCliente(group)">Seleccionar</button></td>
                 </tr>
               </tbody>
             </table>
@@ -44,11 +48,9 @@
           id="paginationCliente"
           [previousLabel]="back"
           [nextLabel]="next"
-          (pageChange)="pageChanged($event)">
-          
+          (pageChange)="pageChanged($event)">          
       </pagination-controls>  
-      </div>
-     
+      </div>     
       <div class="modal-footer">
       </div>
     </div>
