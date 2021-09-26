@@ -7,6 +7,8 @@ import { ServicetipoproductoService } from '../service/servicetipoproducto.servi
 import { Component, OnInit } from '@angular/core';
 import { Servicio } from '../models/servicio';
 import { ServicioService } from '../service/servicio.service';
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
 
 type Filtro = {
   fechaDesde ?: string,
@@ -24,7 +26,7 @@ type Filtro = {
 })
 export class ReporteComponent implements OnInit {
   public data: Servicio[] = [];
-  public columns = ["Fecha","Ficha", "Fecha Ficha", "Profesional","Cliente","Categoria","Subcategoria"];
+  public columns = ["Fecha", "Profesional", "Cliente","Presupuesto","Subcategoria"];
 
   categorias: Categoria [] = []
   tipoProductos: Subcategoria[] = []
@@ -55,6 +57,67 @@ export class ReporteComponent implements OnInit {
     }else{
       console.log("xd")
     }
+  }
+
+  descargarPDF(): void{
+    console.log("pdf")
+    var doc = new jsPDF();
+    let datos:any[]=[];
+    console.log(this.data)
+    this.data.forEach((fila)=>{
+      let row:any[] = [] 
+      row.push(fila.fechaHora.split(" ")[0])
+      row.push(fila.idFichaClinica.idEmpleado.nombreCompleto)  
+      row.push(fila.idFichaClinica.idCliente.nombreCompleto)
+      row.push(fila.presupuesto)
+      row.push(fila.idFichaClinica.idTipoProducto.descripcion)
+
+
+      datos.push(row)
+    });
+    doc.setFontSize(12);
+    let cabecera="Reporte Basico de Servicios\n";
+    //CONTADOR DE LINEAS
+    let contadorLineas = 1;
+    if(this.filtros.idEmpleado){
+      cabecera += "Profesional: " + this.empleado.nombreCompleto+"\n";
+      contadorLineas+=1;
+    }
+    if(this.filtros.idCliente){
+      cabecera += "Cliente: " + this.cliente.nombreCompleto+"\n";
+      contadorLineas+=1;
+    }
+    if (this.filtros.fechaDesde){
+      cabecera += "Fecha Inicio: " + this.filtros.fechaDesde +"\n";
+      contadorLineas+=1;
+    }
+    if (this.filtros.fechaHasta){
+      cabecera += "Fecha Fin: " + this.filtros.fechaHasta+"\n";
+      contadorLineas+=1;
+    }
+    doc.text(cabecera, 11, 8);
+
+    doc.setFontSize(11);
+    doc.setTextColor(100);
+    (doc as any).autoTable({
+      //MACUMBA DE POSICION
+      margin: {top:contadorLineas*10},
+      head: [this.columns],
+      body: datos,
+      theme: 'plain',
+      didDrawCell: (data: { column: { index: any; }; }) => {
+      }
+    })
+    //Se abre el pdf en una nueva linea
+    doc.output('dataurlnewwindow');
+
+    //Se descarga el pdf 
+    doc.save('myteamdetail.pdf');
+  }
+  
+
+  descargarCSV(): void{
+    console.log("csv")
   }
 
   seleccionarEmpleado(empleado: Persona){

@@ -50,15 +50,22 @@
     <tbody>
       <tr *ngFor="let group of data">
         <td>{{group.fechaHora.split(" ")[0]}}</td>
-        <td>{{group.idFichaClinica.idFichaClinica}}</td>
-        <td>{{group.idFichaClinica.fechaHora.split(" ")[0]}}</td>
         <td>{{group.idFichaClinica.idEmpleado.nombre + " " + group.idFichaClinica.idEmpleado.apellido }}</td>
         <td>{{group.idFichaClinica.idCliente.nombre + " " + group.idFichaClinica.idCliente.apellido }}</td>
-        <td>{{group.idFichaClinica.idTipoProducto.idCategoria.descripcion}}</td>
+        <td>{{group.presupuesto}}</td>
         <td>{{group.idFichaClinica.idTipoProducto.descripcion}}</td>
       </tr>
     </tbody>
   </table>
+  </div>
+    
+  <div class="row">
+    <div class="col-md-11 text-end">
+      <button type="button" class="btn btn-success mt-2" (click)="descargarCSV()">CSV</button>
+    </div>
+    <div class="col-md-1 text-end">
+      <button type="button" class="btn btn-success mt-2" (click)="descargarPDF()"> PDF</button>
+    </div>
   </div>
   
   <div class="modal fade" id="empleadoModal" tabindex="-1" aria-hidden="true">
