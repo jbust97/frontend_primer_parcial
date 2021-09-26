@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { listadatos } from 'src/app/models/datos';
 import { Ficha } from 'src/app/models/fichas';
 import { Persona } from 'src/app/models/persona';
-import { Servicio } from 'src/app/models/servicio';
+import { Servicio, ServicioPostBody } from 'src/app/models/servicio';
 import { ServicefichaService } from 'src/app/service/serviceficha.service';
 import { ServicioService } from 'src/app/service/servicio.service';
 
@@ -20,6 +20,18 @@ export class NuevoServicioComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllFichas();
+  }
+
+  crearServicio() {
+
+    let servicioBody = new ServicioPostBody();
+
+    servicioBody.observacion = this.servicio.observacion;
+    servicioBody.idFichaClinica = {
+      idFichaClinica: this.ficha.idFichaClinica,
+    };
+
+    this.servicioService.postServicio(servicioBody).subscribe((data: Servicio) => console.log(JSON.stringify(data)));
   }
 
   seleccionarCliente(cliente: Persona){
