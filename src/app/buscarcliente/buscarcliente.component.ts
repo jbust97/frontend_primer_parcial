@@ -51,6 +51,7 @@ export class BuscarclienteComponent implements OnInit {
   buscar(){
     this.filtros.nombre = this.nombre
     this.filtros.apellido = this.apellido
+    this.config.currentPage = 1
     this.getClientes()
   }
   pageChanged(event: number) : void{

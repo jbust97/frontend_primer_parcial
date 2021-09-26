@@ -4,7 +4,7 @@ export class Servicio {
     idServicio!: number;
     //flagEstado: R,
     fechaHora!: string;
-    //presupuesto: 0.00,
+    presupuesto!: number;
     idFichaClinica!: Ficha;
     observacion!: string;
     //listaDetalles!: T[];
