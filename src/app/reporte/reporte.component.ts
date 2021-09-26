@@ -7,9 +7,10 @@ import { ServicetipoproductoService } from '../service/servicetipoproducto.servi
 import { Component, OnInit } from '@angular/core';
 import { Servicio } from '../models/servicio';
 import { ServicioService } from '../service/servicio.service';
+import { Detalle } from '../models/detalle'
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
-import {ExportToCSV} from "@molteni/export-csv";
+import { ExportToCSV } from "@molteni/export-csv";
 
 type Filtro = {
   fechaDesde ?: string,
@@ -28,9 +29,13 @@ type Filtro = {
 
 export class ReporteComponent implements OnInit {
   public data: Servicio[] = [];
-  public columns = ["Fecha", "Profesional", "Cliente","Presupuesto","Subcategoria"];
+  public superData: Detalle[]=[];
+  public columns: string[]=[];
   
-  esconder = true;
+  // variables togleables para ocultar tablas y botones de acuerdo al formato del reporte
+  esconderDetallado = true;
+  esconderBasico = true;
+  esconderBoton = true;
 
   categorias: Categoria [] = []
   tipoProductos: Subcategoria[] = []
@@ -54,21 +59,39 @@ export class ReporteComponent implements OnInit {
     });
   }
 
+  getDetalles(){
+    this.servicioServicio.getServiciosDetallado(this.filtros)
+    .subscribe((data:any)=>{
+     console.log(data);
+     this.superData = data.lista;
+    });
+  }
+
   generarReporteDetallado(): void{
     this.tipoReporte = "detallado"
-    this.esconder = false
-    console.log("se toco el boton detallado")  
+    //funciona, no tocar
+    this.esconderDetallado = false
+    this.esconderBasico = true
+    this.esconderBoton = false
+    this.columns = ["Servicio", "Fecha", "Profesional", "Cliente","Precio","Cantidad","Total","Presentacion"]
+    this.filtros.idCliente = this.cliente.idPersona
+    this.filtros.idEmpleado = this.empleado.idPersona
+    if (this.filtros.fechaDesde && this.filtros.fechaHasta){
+      this.getDetalles()  
+    }
   }
 
   generarReporteBasico(): void{
     this.tipoReporte= "basico"
-    this.esconder = false
+    //funciona, no tocar
+    this.esconderDetallado = true
+    this.esconderBasico = false
+    this.esconderBoton = false
+    this.columns = ["Fecha", "Profesional", "Cliente","Presupuesto","Subcategoria"]
     this.filtros.idCliente = this.cliente.idPersona
     this.filtros.idEmpleado = this.empleado.idPersona
     if (this.filtros.fechaDesde && this.filtros.fechaHasta){
       this.getServicios()  
-    }else{
-      console.log("Agregar funcion de deshabilitar boton")
     }
   }
   //DESCARGAR EXCEL
@@ -76,11 +99,11 @@ export class ReporteComponent implements OnInit {
     if (this.tipoReporte == "basico"){
       this.basicoCSV();
     }
-    if(this.tipoReporte == "detallado"){
+    else if(this.tipoReporte == "detallado"){
       this.detalladoCSV();
     }
     else{
-      console.log("llama a Hugo Fleitas")
+      console.log("llama al mismisimo Hugo Fleitas y mostrale este mensaje")
     }
   }
 
@@ -100,7 +123,21 @@ export class ReporteComponent implements OnInit {
   }
 
   detalladoCSV():void{
-    console.log("agregar la planilla detallado")
+    let datos:any[]=[];
+    this.superData.forEach((fila)=>{
+      let row:any = {} 
+      row["Servicio"]=fila.idServicio.idServicio
+      row["Fecha"]=fila.idServicio.fechaHora.split(" ")[0]
+      row["Profesional"]=fila.idServicio.idFichaClinica.idEmpleado.nombreCompleto
+      row["Cliente"]=fila.idServicio.idFichaClinica.idCliente.nombreCompleto
+      row["Precio"]=fila.idPresentacionProducto.existenciaProducto.precioVenta
+      row["Cantidad"]=fila.cantidad
+      row["Total"]=fila.idPresentacionProducto.existenciaProducto.precioVenta*fila.cantidad
+      row["Presentacion"]=fila.idPresentacionProducto.nombre
+      datos.push(row)
+    });
+    let exportadorCSV = new ExportToCSV(); 
+    exportadorCSV.exportColumnsToCSV(datos, "Servicios_Detallados" + new Date().toISOString().slice(0, 10) + ".xlsx" ,this.columns);
   }
 
   //DESCARGAR PDF
@@ -108,8 +145,8 @@ export class ReporteComponent implements OnInit {
     if (this.tipoReporte == "basico"){
       this.basicoPDF();
     }
-    if(this.tipoReporte == "detallado"){
-      console.log("agregar la detallado detallado")
+    else if(this.tipoReporte == "detallado"){
+      this.detalladoPDF();
     }
     else{
       console.log("llama a Hugo Fleitas")
@@ -129,8 +166,8 @@ export class ReporteComponent implements OnInit {
       row.push(fila.idFichaClinica.idTipoProducto.descripcion)
       datos.push(row)
     });
-    doc.setFontSize(13).setFont('', 'bold');
-    doc.text('Reporte Basico de Servicios\n',doc.internal.pageSize.getWidth() / 2, 8, {align: 'center'}).setFontSize(11).setFont('', 'normal');
+    doc.setFontSize(13).setFont('helvetica', 'bold');
+    doc.text('Reporte Básico de Servicios\n',doc.internal.pageSize.getWidth() / 2, 8, {align: 'center'}).setFontSize(11).setFont('Helvetica','normal');
     let contadorLineas = 1;
     let cabecera = ""
     if(this.filtros.idEmpleado){
@@ -165,7 +202,54 @@ export class ReporteComponent implements OnInit {
   }
   
   detalladoPDF():void{
-    console.log("agregar pdf detallado")
+    var doc = new jsPDF();
+    let datos:any[]=[];
+    console.log(this.superData)
+    this.superData.forEach((fila)=>{
+      let row:any[] = [] 
+        row.push(fila.idServicio.idServicio)
+        row.push(fila.idServicio.fechaHora.split(" ")[0])
+        row.push(fila.idServicio.idFichaClinica.idEmpleado.nombreCompleto)
+        row.push(fila.idServicio.idFichaClinica.idCliente.nombreCompleto)
+        row.push(fila.idPresentacionProducto.existenciaProducto.precioVenta)
+        row.push(fila.cantidad)
+        row.push(fila.idPresentacionProducto.existenciaProducto.precioVenta*fila.cantidad)
+        row.push(fila.idPresentacionProducto.nombre)
+        datos.push(row)
+    });
+    doc.setFontSize(13).setFont('helvetica', 'bold');
+    doc.text('Reporte Detallado de Servicios\n',doc.internal.pageSize.getWidth() / 2, 8, {align: 'center'}).setFontSize(11).setFont('Helvetica','normal');
+    let contadorLineas = 1;
+    let cabecera = ""
+    if(this.filtros.idEmpleado){
+      cabecera += "Profesional: " + this.empleado.nombreCompleto+"\n";
+      contadorLineas+=1;
+    }
+    if(this.filtros.idCliente){
+      cabecera += "Cliente: " + this.cliente.nombreCompleto+"\n";
+      contadorLineas+=1;
+    }
+    if (this.filtros.fechaDesde){
+      cabecera += "Fecha Inicio: " + this.filtros.fechaDesde +"\n";
+      contadorLineas+=1;
+    }
+    if (this.filtros.fechaHasta){
+      cabecera += "Fecha Fin: " + this.filtros.fechaHasta+"\n";
+      contadorLineas+=1;
+    }
+    doc.text(cabecera, 11, 16); //agrega cabecera al pdf
+    doc.setFontSize(11);
+    doc.setTextColor(100);
+    (doc as any).autoTable({
+      margin: {top:contadorLineas*9},
+      head: [this.columns],
+      body: datos,
+      theme: 'plain',
+      didDrawCell: (data: { column: { index: any; }; }) => {
+      }
+    })
+    doc.output('dataurlnewwindow');
+    doc.save('myteamdetail.pdf');
   }
 
   seleccionarEmpleado(empleado: Persona){
