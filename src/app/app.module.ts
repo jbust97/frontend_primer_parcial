@@ -15,6 +15,7 @@ import { BuscarempleadoComponent } from './buscarempleado/buscarempleado.compone
 import { BuscarclienteComponent } from './buscarcliente/buscarcliente.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { ServicioComponent } from './servicio/servicio.component';
+import { NuevoServicioComponent } from './servicio/nuevo-servicio/nuevo-servicio.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ServicioComponent } from './servicio/servicio.component';
     BuscarclienteComponent,
     ReservaComponent,
     ServicioComponent,
+    NuevoServicioComponent,
 
     
   ],
