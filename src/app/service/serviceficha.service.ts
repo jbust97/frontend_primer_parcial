@@ -16,6 +16,11 @@ export class ServicefichaService {
   getfichas(itemsPerPage:number,inicio:number):Observable<listadatos<Ficha>>{
     return this.http.get<listadatos<Ficha>>(this.api + `?cantidad=${itemsPerPage}&inicio=${inicio}`);
   }
+
+  getAllfichas():Observable<listadatos<Ficha>>{
+    return this.http.get<listadatos<Ficha>>(this.api);
+  }
+
   postficha(ficha: Ficha):Observable<Ficha>{  
     console.log(this.api)
     console.log("headers: " + localStorage.getItem("userSession") ?? "" )

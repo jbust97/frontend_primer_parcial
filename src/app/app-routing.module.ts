@@ -5,6 +5,7 @@ import { NuevafichaComponent } from './ficha/nuevaficha/nuevaficha.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ReservaComponent } from './reserva/reserva.component';
+import { NuevoServicioComponent } from './servicio/nuevo-servicio/nuevo-servicio.component';
 import { ServicioComponent } from './servicio/servicio.component';
 
 const routes: Routes = [
@@ -32,7 +33,11 @@ const routes: Routes = [
   {
     path: "servicio",
     component: ServicioComponent
-  }
+  },
+  {
+    path: "servicio/nuevo",
+    component: NuevoServicioComponent
+  },
 
 ];
 

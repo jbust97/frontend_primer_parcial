@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { listadatos } from 'src/app/models/datos';
 import { Ficha } from 'src/app/models/fichas';
+import { Persona } from 'src/app/models/persona';
 import { Servicio } from 'src/app/models/servicio';
 import { ServicefichaService } from 'src/app/service/serviceficha.service';
 import { ServicioService } from 'src/app/service/servicio.service';
@@ -9,22 +11,34 @@ import { ServicioService } from 'src/app/service/servicio.service';
   templateUrl: './nuevo-servicio.component.html',
   styleUrls: ['./nuevo-servicio.component.css']
 })
-export class NuevoServicioComponent implements OnInit {
-
+export class NuevoServicioComponent implements OnInit { 
+  servicio: Servicio = new Servicio();
   ficha: Ficha = new Ficha();
   fichas: Ficha[] = []
+  cliente: Persona = new Persona();
   constructor(private servicioService: ServicioService, private serviceFicha: ServicefichaService) { }
 
   ngOnInit(): void {
+    this.getAllFichas();
   }
 
-  getFichas(){
-    this.serviceFicha.getfichas(5,0).subscribe((data:any)=>{
+  seleccionarCliente(cliente: Persona){
+    this.getAllFichas();
+    this.cliente = cliente
+    this.cliente.fullName = cliente.nombre + " " + cliente.apellido;
+    this.serviceFicha.getAllfichas().subscribe((data:listadatos<Ficha>)=>{
+      this.fichas = data.lista.filter(ficha => ficha.idCliente.idPersona === cliente.idPersona);
+    })
+  }
+
+  getAllFichas(){
+    this.serviceFicha.getAllfichas().subscribe((data:any)=>{
       this.fichas = data.lista;
     })
   }
 
-  guardarServicio(){
+  guardarServicio(servicio: Partial<Servicio>){
+    console.log()
     /*this.ficha.idCliente = new Persona;
     this.ficha.idEmpleado = new Persona;
     this.ficha.idTipoProducto = new Subcategoria;
