@@ -1,4 +1,5 @@
 import { Ficha } from "./fichas";
+import { PresentacionProducto } from "./presentacionProducto";
 
 export class Servicio {
     idServicio!: number;
@@ -13,4 +14,10 @@ export class Servicio {
 export class ServicioPostBody {
     idFichaClinica!: Partial<Ficha>;
     observacion!: string;
+}
+
+export class DetallePostBody {
+    cantidad!: number;
+    idPresentacionProducto!: Partial<PresentacionProducto>;
+    idServicio!: Partial<Servicio>;
 }
