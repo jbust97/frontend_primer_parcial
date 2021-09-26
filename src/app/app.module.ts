@@ -15,6 +15,8 @@ import { BuscarempleadoComponent } from './buscarempleado/buscarempleado.compone
 import { BuscarclienteComponent } from './buscarcliente/buscarcliente.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { ServicioComponent } from './servicio/servicio.component';
+import { NuevaReservaComponent } from './reserva/nueva-reserva/nueva-reserva.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { ServicioComponent } from './servicio/servicio.component';
     BuscarclienteComponent,
     ReservaComponent,
     ServicioComponent,
+    NuevaReservaComponent,
 
     
   ],
@@ -36,6 +39,7 @@ import { ServicioComponent } from './servicio/servicio.component';
     HttpClientModule,
     FormsModule,
     NgxPaginationModule,
+    NgbModule,
   ],
   providers: [ServicepersonaService],
   bootstrap: [AppComponent]
