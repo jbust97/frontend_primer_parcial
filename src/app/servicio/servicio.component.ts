@@ -19,7 +19,7 @@ export class ServicioComponent implements OnInit {
   next = "Siguiente"
   back = "Atras"
   
-  constructor(private servicioServicio: ServicioService) { }
+  constructor(private servicioService: ServicioService) { }
 
   ngOnInit(){
     this.getServicio();
@@ -29,12 +29,18 @@ export class ServicioComponent implements OnInit {
     let itemsPerPage = this.config.itemsPerPage;
     let inicio = currentPage-1;
     inicio = inicio*itemsPerPage; 
-    this.servicioServicio.getServicio(itemsPerPage,inicio)
+    this.servicioService.getServicio(itemsPerPage,inicio)
     .subscribe((data:any)=>{
      console.log(data);
      this.data = data.lista;
      this.config.totalItems=  data.totalDatos;
     });
+  }
+
+  cancelarServicio(servicio: Servicio) {
+    this.servicioService.cancelarServicio(servicio.idServicio)
+    .subscribe((data:any) => console.log(`Servicio ${servicio.idServicio} cancelada!`));
+    this.getServicios();
   }
 
   pageChanged(event: number){
