@@ -7,6 +7,9 @@ export class Reserva {
     horaFin!: string;
     idEmpleado!: Persona;
     idCliente!: Persona;
+    flagEstado!: string;
+    flagAsistio!: string;
+    observacion!: string;
 }
 
 export class ReservaPostBody {
@@ -15,4 +18,10 @@ export class ReservaPostBody {
     horaFinCadena!: string;
     idEmpleado!: Partial<Persona>;
     idCliente!: Partial<Persona>; 
+}
+
+export class ReservaPutBody {
+    idReserva!: number;
+    flagAsistio!: string;
+    observacion!: string;
 }

@@ -5,6 +5,7 @@ import { ModificarfichaComponent } from './ficha/modificarficha/modificarficha.c
 import { NuevafichaComponent } from './ficha/nuevaficha/nuevaficha.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ModificarReservaComponent } from './reserva/modificar-reserva/modificar-reserva.component';
 import { NuevaReservaComponent } from './reserva/nueva-reserva/nueva-reserva.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { NuevoServicioComponent } from './servicio/nuevo-servicio/nuevo-servicio.component';
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: "reserva/nuevo",
     component: NuevaReservaComponent
+  },
+  {
+    path: "reserva/:id/editar",
+    component: ModificarReservaComponent
   },
   {
     path: "servicio",

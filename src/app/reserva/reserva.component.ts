@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { listadatos } from '../models/datos';
 import { Reserva } from "../models/reserva";
 import { ReservaService } from '../service/reserva.service';
 
@@ -31,7 +32,7 @@ export class ReservaComponent implements OnInit {
     inicio = inicio * itemsPerPage; 
 
     this.reservaService.getReservas(itemsPerPage,inicio)
-    .subscribe((data:any) => {
+    .subscribe((data:listadatos<Reserva>) => {
      this.data = data.lista;
      this.config.totalItems = data.totalDatos;
     });
