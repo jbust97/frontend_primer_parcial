@@ -1,6 +1,7 @@
 import { Persona } from "./persona";
 
 export class Reserva {
+    idReserva!: number;
     fecha!: string;
     horaInicio!: string;
     horaFin!: string;
