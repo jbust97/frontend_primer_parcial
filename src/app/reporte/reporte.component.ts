@@ -134,7 +134,6 @@ export class ReporteComponent implements OnInit {
       row["Cantidad"]=fila.cantidad
       row["Total"]=fila.idPresentacionProducto.existenciaProducto.precioVenta*fila.cantidad
       row["Presentacion"]=fila.idPresentacionProducto.nombre
-      console.log(row)
       datos.push(row)
     });
     let exportadorCSV = new ExportToCSV(); 
@@ -147,7 +146,7 @@ export class ReporteComponent implements OnInit {
       this.basicoPDF();
     }
     else if(this.tipoReporte == "detallado"){
-      console.log("agregar la detallado detallado")
+      this.detalladoPDF();
     }
     else{
       console.log("llama a Hugo Fleitas")
@@ -203,7 +202,54 @@ export class ReporteComponent implements OnInit {
   }
   
   detalladoPDF():void{
-    console.log("agregar pdf detallado")
+    var doc = new jsPDF();
+    let datos:any[]=[];
+    console.log(this.superData)
+    this.superData.forEach((fila)=>{
+      let row:any[] = [] 
+        row.push(fila.idServicio.idServicio)
+        row.push(fila.idServicio.fechaHora.split(" ")[0])
+        row.push(fila.idServicio.idFichaClinica.idEmpleado.nombreCompleto)
+        row.push(fila.idServicio.idFichaClinica.idCliente.nombreCompleto)
+        row.push(fila.idPresentacionProducto.existenciaProducto.precioVenta)
+        row.push(fila.cantidad)
+        row.push(fila.idPresentacionProducto.existenciaProducto.precioVenta*fila.cantidad)
+        row.push(fila.idPresentacionProducto.nombre)
+        datos.push(row)
+    });
+    doc.setFontSize(13).setFont('helvetica', 'bold');
+    doc.text('Reporte Detallado de Servicios\n',doc.internal.pageSize.getWidth() / 2, 8, {align: 'center'}).setFontSize(11).setFont('Helvetica','normal');
+    let contadorLineas = 1;
+    let cabecera = ""
+    if(this.filtros.idEmpleado){
+      cabecera += "Profesional: " + this.empleado.nombreCompleto+"\n";
+      contadorLineas+=1;
+    }
+    if(this.filtros.idCliente){
+      cabecera += "Cliente: " + this.cliente.nombreCompleto+"\n";
+      contadorLineas+=1;
+    }
+    if (this.filtros.fechaDesde){
+      cabecera += "Fecha Inicio: " + this.filtros.fechaDesde +"\n";
+      contadorLineas+=1;
+    }
+    if (this.filtros.fechaHasta){
+      cabecera += "Fecha Fin: " + this.filtros.fechaHasta+"\n";
+      contadorLineas+=1;
+    }
+    doc.text(cabecera, 11, 16); //agrega cabecera al pdf
+    doc.setFontSize(11);
+    doc.setTextColor(100);
+    (doc as any).autoTable({
+      margin: {top:contadorLineas*9},
+      head: [this.columns],
+      body: datos,
+      theme: 'plain',
+      didDrawCell: (data: { column: { index: any; }; }) => {
+      }
+    })
+    doc.output('dataurlnewwindow');
+    doc.save('myteamdetail.pdf');
   }
 
   seleccionarEmpleado(empleado: Persona){
