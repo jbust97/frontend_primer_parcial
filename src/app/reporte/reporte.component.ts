@@ -73,7 +73,7 @@ export class ReporteComponent implements OnInit {
     this.esconderDetallado = false
     this.esconderBasico = true
     this.esconderBoton = false
-    this.columns = ["Servicio", "Fecha", "Profesional", "Cliente","Costo unitario","Cantidad","Total","Presentacion"]
+    this.columns = ["Servicio", "Fecha", "Profesional", "Cliente","Precio","Cantidad","Total","Presentacion"]
     this.filtros.idCliente = this.cliente.idPersona
     this.filtros.idEmpleado = this.empleado.idPersona
     if (this.filtros.fechaDesde && this.filtros.fechaHasta){
@@ -103,7 +103,7 @@ export class ReporteComponent implements OnInit {
       this.detalladoCSV();
     }
     else{
-      console.log("llama a Hugo Fleitas")
+      console.log("llama al mismisimo Hugo Fleitas y mostrale este mensaje")
     }
   }
 
@@ -123,7 +123,22 @@ export class ReporteComponent implements OnInit {
   }
 
   detalladoCSV():void{
-    console.log("agregar la planilla detallado")
+    let datos:any[]=[];
+    this.superData.forEach((fila)=>{
+      let row:any = {} 
+      row["Servicio"]=fila.idServicio.idServicio
+      row["Fecha"]=fila.idServicio.fechaHora.split(" ")[0]
+      row["Profesional"]=fila.idServicio.idFichaClinica.idEmpleado.nombreCompleto
+      row["Cliente"]=fila.idServicio.idFichaClinica.idCliente.nombreCompleto
+      row["Precio"]=fila.idPresentacionProducto.existenciaProducto.precioVenta
+      row["Cantidad"]=fila.cantidad
+      row["Total"]=fila.idPresentacionProducto.existenciaProducto.precioVenta*fila.cantidad
+      row["Presentacion"]=fila.idPresentacionProducto.nombre
+      console.log(row)
+      datos.push(row)
+    });
+    let exportadorCSV = new ExportToCSV(); 
+    exportadorCSV.exportColumnsToCSV(datos, "Servicios_Detallados" + new Date().toISOString().slice(0, 10) + ".xlsx" ,this.columns);
   }
 
   //DESCARGAR PDF
