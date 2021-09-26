@@ -1,4 +1,5 @@
 {
+  
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
@@ -32,7 +33,9 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/jspdf/dist/jspdf.es.min.js",
+              "node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
             ]
           },
           "configurations": {

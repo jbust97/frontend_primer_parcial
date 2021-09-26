@@ -17,6 +17,7 @@ import { ReservaComponent } from './reserva/reserva.component';
 import { ServicioComponent } from './servicio/servicio.component';
 import { NuevoServicioComponent } from './servicio/nuevo-servicio/nuevo-servicio.component';
 import { ModificarfichaComponent } from './ficha/modificarficha/modificarficha.component';
+import { ReporteComponent } from './reporte/reporte.component';
 import { NuevaReservaComponent } from './reserva/nueva-reserva/nueva-reserva.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -35,6 +36,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NuevoServicioComponent,
     NuevaReservaComponent,
     ModificarfichaComponent,
+    ReporteComponent,
   ],
   imports: [
     BrowserModule,
