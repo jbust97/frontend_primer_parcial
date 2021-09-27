@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Persona } from 'src/app/models/persona';
 import { PresentacionProducto } from 'src/app/models/presentacionProducto';
 import { DetallePostBody, Servicio } from 'src/app/models/servicio';
 import { ServicioService } from 'src/app/service/servicio.service';
@@ -12,6 +13,8 @@ import { ServicioService } from 'src/app/service/servicio.service';
 export class AgregarDetalleComponent implements OnInit {
 
   servicio: Servicio = new Servicio();
+  empleado: Persona = new Persona();
+  cliente: Persona = new Persona();
   cantidad: number = 0;
   public presentacionProductos: PresentacionProducto[] = [];
   public presentacionProducto: PresentacionProducto = new PresentacionProducto();
@@ -24,6 +27,9 @@ export class AgregarDetalleComponent implements OnInit {
       this.servicioService.getUnServicio(this.servicio.idServicio)
       .subscribe((data:any)=>{
         this.servicio = data;
+        this.empleado = data.idEmpleado;
+        this.cliente = data.idFichaClinica.idCliente;
+        console.log(data)
         /*this.ficha.idCliente.fullName =this.ficha.idCliente.nombre + ' ' + this.ficha.idCliente.apellido;
         this.ficha.idEmpleado.fullName =this.ficha.idEmpleado.nombre + ' ' +   this.ficha.idEmpleado.apellido;*/
 

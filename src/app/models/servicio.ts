@@ -16,7 +16,7 @@ export class ServicioPostBody {
     observacion!: string;
 }
 
-export class Detalle {
+export class DetalleS {
     idServicioDetalle!: number;
     idPresentacionProducto!: PresentacionProducto;
     idServicio!: Servicio;
