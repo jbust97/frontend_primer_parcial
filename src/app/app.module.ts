@@ -20,7 +20,9 @@ import { ModificarfichaComponent } from './ficha/modificarficha/modificarficha.c
 import { ReporteComponent } from './reporte/reporte.component';
 import { NuevaReservaComponent } from './reserva/nueva-reserva/nueva-reserva.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AgregarDetalleComponent } from './servicio/agregar-detalle/agregar-detalle.component';
 import { ModificarReservaComponent } from './reserva/modificar-reserva/modificar-reserva.component';
+import { VerServicioComponent } from './servicio/ver-servicio/ver-servicio.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { ModificarReservaComponent } from './reserva/modificar-reserva/modificar
     NuevaReservaComponent,
     ModificarReservaComponent,
     ModificarfichaComponent,
+    AgregarDetalleComponent,
+    VerServicioComponent,
     ReporteComponent,
   ],
   imports: [

@@ -14,7 +14,7 @@ import { ServicioService } from 'src/app/service/servicio.service';
 export class NuevoServicioComponent implements OnInit { 
   servicio: Servicio = new Servicio();
   ficha: Ficha = new Ficha();
-  fichas: Ficha[] = []
+  fichas: Ficha[] = [];
   cliente: Persona = new Persona();
   constructor(private servicioService: ServicioService, private serviceFicha: ServicefichaService) { }
 
