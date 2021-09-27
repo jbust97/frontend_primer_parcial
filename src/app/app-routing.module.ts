@@ -13,6 +13,8 @@ import { NuevoServicioComponent } from './servicio/nuevo-servicio/nuevo-servicio
 import { ServicioComponent } from './servicio/servicio.component';
 import { VerServicioComponent } from './servicio/ver-servicio/ver-servicio.component';
 import { ReporteComponent } from './reporte/reporte.component';
+import { VerServicioComponent } from './servicio/ver-servicio/ver-servicio.component';
+import { AgregarDetalleComponent } from './servicio/agregar-detalle/agregar-detalle.component';
 
 const routes: Routes = [
   {
@@ -64,8 +66,7 @@ const routes: Routes = [
     path: "servicio/:id/detalle",
     component: AgregarDetalleComponent
   },
-
-  { 
+  {
     path: "reporte",
     component: ReporteComponent
   }

@@ -30,6 +30,12 @@
       <input type="date" class="form-control" id="fechaHasta"  name="fechaHasta" [(ngModel)]="filtros.fechaHasta"> 
     </div>
   </div>
+  <div class="row">
+    <label for="presentacionProducto">Presentacion Producto</label>
+    <select name="presentacionProducto" class="form-select" id="presentacionProducto" [(ngModel)]="presentacionProducto"> 
+        <option *ngFor="let presentacionProducto of presentacionProductos" [ngValue]="presentacionProducto">{{presentacionProducto.nombre}}</option>
+    </select>
+  </div>
   </form>
   
   <div class="row">

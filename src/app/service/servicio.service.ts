@@ -69,32 +69,35 @@ export class ServicioService {
         }
       });
     }
-
-    getDetalles(idServicio: number): Observable < listadatos < Detalle >> {
-      console.log(`${this.api}/${idServicio}/detalle`)
+  
+  getDetalles(idServicio: number):Observable<listadatos<Detalle>> {
+    console.log(`${this.api}/${idServicio}/detalle`)
     return this.http.get<listadatos<Detalle>>(`${this.api}/${idServicio}/detalle`);
-    }
+  }
 
-    getPresentacionProducto(): Observable < listadatos < PresentacionProducto >> {
-      return this.http.get<listadatos<PresentacionProducto>>(this.api);
-    }
+  getPresentacionProducto():Observable<listadatos<PresentacionProducto>>{
+    return this.http.get<listadatos<PresentacionProducto>>(base_url + 'stock-pwfe/presentacionProducto');
+  } 
+
+   
 
 
-    getServicioFicha(idFichaClinica: number): Observable < listadatos < Servicio >> {
-      let params = new HttpParams()
-        .set('ejemplo', `{"idFichaClinica":{"idFichaClinica": ${idFichaClinica}}}`);
-      return this.http.get<listadatos<Servicio>>(this.api, { params: params });
-    }
-    getServicios(filtros: any): Observable < listadatos < Servicio >> {
-      let ejemplo: any = {}
-    if(filtros.fechaDesde) {
+   
+ getServicioFicha(idFichaClinica: number):Observable<listadatos<Servicio>>{
+    let params = new HttpParams()
+    .set('ejemplo',`{"idFichaClinica":{"idFichaClinica": ${idFichaClinica}}}`);
+    return this.http.get<listadatos<Servicio>>(this.api, {params:params}); 
+  }
+  getServicios(filtros: any): Observable<listadatos<Servicio>>{
+    let ejemplo:any = {"idFichaClinica":{}}
+    if(filtros.fechaDesde){
       ejemplo['fechaDesdeCadena'] = filtros.fechaDesde.split('-').join('')
     }
     if (filtros.fechaHasta) {
       ejemplo['fechaHastaCadena'] = filtros.fechaHasta.split('-').join('')
     }
-    if (filtros.idCliente) {
-      ejemplo['idFichaClinica'] = { "idCliente": { "idPersona": filtros.idCliente } }
+    if (filtros.idCliente){
+      ejemplo['idFichaClinica']["idCliente"] = {"idPersona": filtros.idCliente}
     }
     if (filtros.idEmpleado) {
       ejemplo['idEmpleado'] = { "idPersona": filtros.idEmpleado }
@@ -119,7 +122,9 @@ export class ServicioService {
     if (filtros.idEmpleado) {
       ejemplo['idServicio']['idEmpleado'] = { "idPersona": filtros.idEmpleado }
     }
-    //falta 1 filtro del orto
+    if (filtros.idPresentacionProducto){
+      ejemplo['idPresentacionProducto'] = {"idPresentacionProducto": filtros.idPresentacionProducto}
+    }
     let params = new HttpParams()
       .set('ejemplo', JSON.stringify(ejemplo))
       .set('detalle', "S")
