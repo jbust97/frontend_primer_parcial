@@ -10,7 +10,6 @@ import { ServicioService } from 'src/app/service/servicio.service';
   styleUrls: ['./ver-servicio.component.css']
 })
 export class VerServicioComponent implements OnInit {
-  public columns = ["Fecha","Ficha", "Fecha Ficha", "Profesional","Cliente","Categoria","Subcategoria","Acciones"];
   servicio: Servicio = new Servicio();
   detalle: Detalle = new Detalle();
   data: Detalle[] = [];

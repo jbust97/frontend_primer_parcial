@@ -31,18 +31,20 @@
     </div>
   </div>
   <div class="row">
+    <div class="form-group col-6">
     <label for="presentacionProducto">Presentacion Producto</label>
     <select name="presentacionProducto" class="form-select" id="presentacionProducto" [(ngModel)]="presentacionProducto"> 
         <option *ngFor="let presentacionProducto of presentacionProductos" [ngValue]="presentacionProducto">{{presentacionProducto.nombre}}</option>
     </select>
   </div>
+  </div>
   </form>
   
   <div class="row">
-    <div class="col-md-10 text-end">
+    <div class="col-md-9 text-end">
       <button type="button" class="btn btn-info mt-2" [disabled]="!filtros.fechaDesde || !filtros.fechaHasta" (click)="generarReporteBasico()">Generar Reporte Basico</button>
     </div>
-    <div class="col-md-2 text-end">
+    <div class="col-md-3 text-end">
       <button type="button" class="btn btn-info mt-2" [disabled]="!filtros.fechaDesde || !filtros.fechaHasta" (click)="generarReporteDetallado()">Generar Reporte Detallado</button>
     </div>
   </div>

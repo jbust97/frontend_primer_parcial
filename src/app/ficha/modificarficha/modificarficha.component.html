@@ -60,7 +60,7 @@
             <tr *ngFor="let group of servicios">
               <td>{{group.fechaHora.split(" ")[0]}}</td>
               <td>{{group.presupuesto}}</td>
-              <td><button class="btn  btn-outline-success"  [routerLink]="[group.idServicio,'editar']">Editar</button></td>
+              <td><button class="btn  btn-outline-success"  [routerLink]="['/','servicio',group.idServicio,'ver']">Editar</button></td>
             </tr>
           </tbody>
         </table>
