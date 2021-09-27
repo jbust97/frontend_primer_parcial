@@ -22,6 +22,7 @@ export class VerServicioComponent implements OnInit {
       this.servicioService.getUnServicio(this.servicio.idServicio)
       .subscribe((data:any)=>{
         this.servicio = data;
+        this.getDetalles();
         /*this.ficha.idCliente.fullName =this.ficha.idCliente.nombre + ' ' + this.ficha.idCliente.apellido;
         this.ficha.idEmpleado.fullName =this.ficha.idEmpleado.nombre + ' ' +   this.ficha.idEmpleado.apellido;*/
 
@@ -35,8 +36,9 @@ export class VerServicioComponent implements OnInit {
   getDetalles() { 
 
     this.servicioService.getDetalles(this.servicio.idServicio)
-    .subscribe((data:listadatos<Detalle>) => {
-     this.data = data.lista;
+    .subscribe((data:any) => {
+     this.data = data;
+     console.log(this.data)
     });
   }
 

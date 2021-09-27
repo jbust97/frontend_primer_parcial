@@ -61,11 +61,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let group of data">
-                <td>{{group.idPresentacionProducto}}</td>
-                <td>{{group.idServicio}}</td>
+                <td>{{group.idPresentacionProducto.nombre}}</td>
+                <td>{{group.idServicio.idServicio}}</td>
                 <td>{{group.idServicioDetalle}}</td>
                 <td>
-                    <button class="btn  btn-outline-success">Eliminar Detalle</button>
+                    <button class="btn  btn-outline-success" (click)="deleteDetalle(group)">Eliminar Detalle</button>
 
                 </td>
 
