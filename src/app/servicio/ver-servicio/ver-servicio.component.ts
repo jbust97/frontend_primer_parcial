@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { listadatos } from 'src/app/models/datos';
-import { Servicio, Detalle } from 'src/app/models/servicio';
+import { Servicio, DetalleS as Detalle } from 'src/app/models/servicio';
 import { ServicioService } from 'src/app/service/servicio.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class VerServicioComponent implements OnInit {
   servicio: Servicio = new Servicio();
   detalle: Detalle = new Detalle();
   data: Detalle[] = [];
+  public columns = ["idPresentacionProducto","idServicio", "IdServicioDetalle"];
   constructor(private route: ActivatedRoute, private servicioService: ServicioService) { }
 
   ngOnInit(): void {
@@ -22,6 +23,7 @@ export class VerServicioComponent implements OnInit {
       this.servicioService.getUnServicio(this.servicio.idServicio)
       .subscribe((data:any)=>{
         this.servicio = data;
+        this.getDetalles();
         /*this.ficha.idCliente.fullName =this.ficha.idCliente.nombre + ' ' + this.ficha.idCliente.apellido;
         this.ficha.idEmpleado.fullName =this.ficha.idEmpleado.nombre + ' ' +   this.ficha.idEmpleado.apellido;*/
 
@@ -35,8 +37,9 @@ export class VerServicioComponent implements OnInit {
   getDetalles() { 
 
     this.servicioService.getDetalles(this.servicio.idServicio)
-    .subscribe((data:listadatos<Detalle>) => {
-     this.data = data.lista;
+    .subscribe((data:any) => {
+     this.data = data;
+     console.log(this.data)
     });
   }
 

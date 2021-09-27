@@ -63,8 +63,8 @@
                 <td>{{group.idFichaClinica.idTipoProducto.idCategoria.descripcion}}</td>
                 <td>{{group.idFichaClinica.idTipoProducto.descripcion}}</td>
                 <td>
-                    <button class="btn  btn-outline-success">Ver Servicio</button>
-                    <button class="btn  btn-outline-success">Agregar Detalle</button>
+                    <button class="btn btn-outline-success mx-2" [routerLink]="[group.idServicio, 'ver']">Ver</button>
+                    <button class="btn btn-outline-success mx-2" [routerLink]="[group.idServicio, 'detalle']">Agregar Detalle</button>
 
                 </td>
 

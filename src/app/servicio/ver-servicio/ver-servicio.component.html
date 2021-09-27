@@ -9,13 +9,13 @@
                     <div class="form-group col-6">
                         <label for="empleado">Empleado</label>
                         <input type="text" class="form-control" id="empleado" name="empleado" readonly
-                            [(ngModel)]="servicio.idFichaClinica.idEmpleado.fullName">
+                            [(ngModel)]="servicio.idFichaClinica.idEmpleado.nombreCompleto">
 
                     </div>
                     <div class="form-group col-6">
                         <label for="cliente">Cliente</label>
                         <input type="text" class="form-control" id="cliente" name="cliente" readonly
-                            [(ngModel)]="servicio.idFichaClinica.idCliente.fullName">
+                            [(ngModel)]="servicio.idFichaClinica.idCliente.nombreCompleto">
                     </div>
                 </div>
                 <div class="row">
@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group">
                     <label for="observacion">Observaciones</label>
-                    <textarea type="text" class="form-control" id="observacion" name="observacion"
+                    <textarea readonly type="text" class="form-control" id="observacion" name="observacion"
                         [(ngModel)]="servicio.observacion"></textarea>
                 </div>
             </form>
@@ -61,11 +61,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let group of data">
-                <td>{{group.idPresentacionProducto}}</td>
-                <td>{{group.idServicio}}</td>
+                <td>{{group.idPresentacionProducto.nombre}}</td>
+                <td>{{group.idServicio.idServicio}}</td>
                 <td>{{group.idServicioDetalle}}</td>
                 <td>
-                    <button class="btn  btn-outline-success">Eliminar Detalle</button>
+                    <button class="btn  btn-outline-success" (click)="deleteDetalle(group)">Eliminar Detalle</button>
 
                 </td>
 
