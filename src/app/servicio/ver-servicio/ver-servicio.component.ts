@@ -13,6 +13,7 @@ export class VerServicioComponent implements OnInit {
   servicio: Servicio = new Servicio();
   detalle: Detalle = new Detalle();
   data: Detalle[] = [];
+  public columns = ["idPresentacionProducto","idServicio", "IdServicioDetalle"];
   constructor(private route: ActivatedRoute, private servicioService: ServicioService) { }
 
   ngOnInit(): void {
