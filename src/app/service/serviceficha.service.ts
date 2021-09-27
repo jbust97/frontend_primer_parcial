@@ -39,7 +39,9 @@ export class ServicefichaService {
     return this.http.get<listadatos<Ficha>>(this.api, {params:params});
 
   }
-
+  getAllfichas():Observable<listadatos<Ficha>>{
+    return this.http.get<listadatos<Ficha>>(this.api);
+  }
   postficha(ficha: Ficha):Observable<Ficha>{  
     console.log("headers: " + localStorage.getItem("userSession") ?? "" )
     return this.http.post<Ficha>(this.api,ficha,{

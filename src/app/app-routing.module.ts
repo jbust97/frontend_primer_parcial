@@ -8,7 +8,12 @@ import { LoginComponent } from './login/login.component';
 import { ModificarReservaComponent } from './reserva/modificar-reserva/modificar-reserva.component';
 import { NuevaReservaComponent } from './reserva/nueva-reserva/nueva-reserva.component';
 import { ReservaComponent } from './reserva/reserva.component';
+import { AgregarDetalleComponent } from './servicio/agregar-detalle/agregar-detalle.component';
+import { NuevoServicioComponent } from './servicio/nuevo-servicio/nuevo-servicio.component';
 import { ServicioComponent } from './servicio/servicio.component';
+import { VerServicioComponent } from './servicio/ver-servicio/ver-servicio.component';
+import { ReporteComponent } from './reporte/reporte.component';
+
 
 const routes: Routes = [
   {
@@ -47,8 +52,24 @@ const routes: Routes = [
   {
     path: "servicio",
     component: ServicioComponent
+  },
+  {
+    path: "servicio/nuevo",
+    component: NuevoServicioComponent
+  },
+  {
+    path: "servicio/:id/ver",
+    component: VerServicioComponent
+  },
+  {
+    path: "servicio/:id/detalle",
+    component: AgregarDetalleComponent
+  },
+  {
+    path: "reporte",
+    component: ReporteComponent
   }
-
+  
 ];
 
 @NgModule({

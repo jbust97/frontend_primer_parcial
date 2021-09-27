@@ -23,7 +23,6 @@ export class ModificarfichaComponent implements OnInit {
         this.ficha = data;
         this.ficha.idCliente.fullName =this.ficha.idCliente.nombre + ' ' + this.ficha.idCliente.apellido;
         this.ficha.idEmpleado.fullName =this.ficha.idEmpleado.nombre + ' ' +   this.ficha.idEmpleado.apellido;
-
       });
       this.servicioServicio.getServicioFicha(this.ficha.idFichaClinica).subscribe((data:any)=>{
         this.servicios = data.lista;
