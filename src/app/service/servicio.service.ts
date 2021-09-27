@@ -61,8 +61,8 @@ export class ServicioService {
   }
 
   cancelarDetalle(idServicio: number, idServicioDetalle: number): Observable<void> {
-    console.log(`${this.api}stock-pwfe/servicio/${idServicio}/detalle/${idServicioDetalle}`)
-    return this.http.delete<void>(`${this.api}stock-pwfe/servicio/${idServicio}/detalle/${idServicioDetalle}`, {
+    console.log(`${this.api}/${idServicio}/detalle/${idServicioDetalle}`)
+    return this.http.delete<void>(`${this.api}/${idServicio}/detalle/${idServicioDetalle}`, {
       headers: {
         "usuario": localStorage.getItem('userSession') as string,
       }
@@ -70,12 +70,12 @@ export class ServicioService {
   }
 
   getDetalles(idServicio: number):Observable<listadatos<Detalle>> {
-    console.log(`${this.api}stock-pwfe/servicio/${idServicio}/detalle`)
-    return this.http.get<listadatos<Detalle>>(`${this.api}stock-pwfe/servicio/${idServicio}/detalle`);
+    console.log(`${this.api}/${idServicio}/detalle`)
+    return this.http.get<listadatos<Detalle>>(`${this.api}/${idServicio}/detalle`);
   }
 
   getPresentacionProducto():Observable<listadatos<PresentacionProducto>>{
-    return this.http.get<listadatos<PresentacionProducto>>(this.api);
+    return this.http.get<listadatos<PresentacionProducto>>(base_url + 'stock-pwfe/presentacionProducto');
   } 
 
 
@@ -85,7 +85,7 @@ export class ServicioService {
     return this.http.get<listadatos<Servicio>>(this.api, {params:params}); 
   }
   getServicios(filtros: any): Observable<listadatos<Servicio>>{
-    let ejemplo:any = {}
+    let ejemplo:any = {"idFichaClinica":{}}
     if(filtros.fechaDesde){
       ejemplo['fechaDesdeCadena'] = filtros.fechaDesde.split('-').join('')
     }
@@ -93,7 +93,7 @@ export class ServicioService {
       ejemplo['fechaHastaCadena'] = filtros.fechaHasta.split('-').join('')
     }
     if (filtros.idCliente){
-      ejemplo['idFichaClinica'] = {"idCliente":{"idPersona": filtros.idCliente}}
+      ejemplo['idFichaClinica']["idCliente"] = {"idPersona": filtros.idCliente}
     }
     if (filtros.idEmpleado){
       ejemplo['idEmpleado'] = {"idPersona": filtros.idEmpleado}
@@ -118,7 +118,9 @@ export class ServicioService {
     if (filtros.idEmpleado){
       ejemplo['idServicio']['idEmpleado'] = {"idPersona": filtros.idEmpleado}
     }
-    //falta 1 filtro del orto
+    if (filtros.idPresentacionProducto){
+      ejemplo['idPresentacionProducto'] = {"idPresentacionProducto": filtros.idPresentacionProducto}
+    }
     let params = new HttpParams()
     .set('ejemplo',JSON.stringify(ejemplo))
     .set('detalle',"S")

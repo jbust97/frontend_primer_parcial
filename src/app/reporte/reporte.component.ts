@@ -11,6 +11,7 @@ import { Detalle } from '../models/detalle'
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import { ExportToCSV } from "@molteni/export-csv";
+import { PresentacionProducto } from '../models/presentacionProducto';
 
 type Filtro = {
   fechaDesde ?: string,
@@ -19,6 +20,7 @@ type Filtro = {
   idCliente?: number,
   idCategoria?: number,
   idTipoProducto?: number,
+  idPresentacionProducto?: number,
 };
 
 @Component({
@@ -39,7 +41,8 @@ export class ReporteComponent implements OnInit {
 
   categorias: Categoria [] = []
   tipoProductos: Subcategoria[] = []
-
+  presentacionProductos: PresentacionProducto[] = [];
+  presentacionProducto: PresentacionProducto = new PresentacionProducto();
   empleado : Persona = new Persona()
   cliente : Persona = new Persona()
   categoria: Categoria = new Categoria()
@@ -49,6 +52,9 @@ export class ReporteComponent implements OnInit {
   constructor(private http: HttpClient, private servicioServicio: ServicioService,private serviceCategoria: ServicecategoriaService,private serviceTipoProducto: ServicetipoproductoService) { }
 
   ngOnInit(){
+    this.servicioServicio.getPresentacionProducto().subscribe((data:any)=>{
+      this.presentacionProductos = data.lista;
+    });
   }
 
   getServicios(){
@@ -76,6 +82,7 @@ export class ReporteComponent implements OnInit {
     this.columns = ["Servicio", "Fecha", "Profesional", "Cliente","Precio","Cantidad","Total","Presentacion"]
     this.filtros.idCliente = this.cliente.idPersona
     this.filtros.idEmpleado = this.empleado.idPersona
+    this.filtros.idPresentacionProducto = this.presentacionProducto.idPresentacionProducto;
     if (this.filtros.fechaDesde && this.filtros.fechaHasta){
       this.getDetalles()  
     }
@@ -90,6 +97,7 @@ export class ReporteComponent implements OnInit {
     this.columns = ["Fecha", "Profesional", "Cliente","Presupuesto","Subcategoria"]
     this.filtros.idCliente = this.cliente.idPersona
     this.filtros.idEmpleado = this.empleado.idPersona
+    this.filtros.idPresentacionProducto = this.presentacionProducto.idPresentacionProducto;
     if (this.filtros.fechaDesde && this.filtros.fechaHasta){
       this.getServicios()  
     }
