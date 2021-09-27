@@ -36,7 +36,7 @@ export class NuevaReservaComponent implements OnInit {
   horaFin: Hora = new Hora();
   fecha: Fecha = new Fecha();
   config = {
-    itemsPerPage: 10,
+    itemsPerPage: 5,
     currentPage: 1,
     totalItems: 1
   }
@@ -98,7 +98,7 @@ export class NuevaReservaComponent implements OnInit {
     let inicio = currentPage - 1;
     inicio = inicio * itemsPerPage; 
 
-    this.reservaService.getAgenda(idEmpleado, fecha)
+    this.reservaService.getAgenda(idEmpleado, fecha, itemsPerPage, inicio)
     .subscribe((data: Reserva[]) => {
      this.data = data;
     });

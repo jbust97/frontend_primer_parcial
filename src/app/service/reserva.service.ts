@@ -30,7 +30,7 @@ export class ReservaService {
     }
 
     ejemplo['flagEstado'] = "R";
-    
+
     console.log(JSON.stringify(ejemplo));
       let params = new HttpParams()
         .set('cantidad', itemsPerPage)
@@ -58,9 +58,14 @@ export class ReservaService {
     });
   }
 
-  getAgenda(idPersona: number, fecha: string): Observable<Reserva[]> {
+  getAgenda(idPersona: number, fecha: string, itemsPerPage: number, inicio: number): Observable<Reserva[]> {
     console.log('Obteniendo agenda');
-    return this.http.get<Reserva[]>(`${this.api}stock-pwfe/persona/${idPersona}/agenda?fecha=${fecha}&disponible=S`);
+    let params = new HttpParams()
+        .set('cantidad', itemsPerPage)
+        .set('inicio', inicio)
+        .set('fecha', fecha)
+        .set('disponible', 'S');
+    return this.http.get<Reserva[]>(`${this.api}stock-pwfe/persona/${idPersona}/agenda`, {params});
   }
 
   getReserva(idReserva: number): Observable<Reserva> {
