@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { listadatos } from '../models/datos';
-import { Servicio, ServicioPostBody, DetallePostBody, Detalle } from '../models/servicio';
+import { Servicio, ServicioPostBody, DetallePostBody, DetalleS as Detalle } from '../models/servicio';
 import { base_url } from '../base_url';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { PresentacionProducto } from '../models/presentacionProducto';
-import { Detalle } from '../models/detalle';
 
 @Injectable({
   providedIn: 'root'
