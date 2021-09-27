@@ -11,7 +11,11 @@ import { ReservaComponent } from './reserva/reserva.component';
 import { AgregarDetalleComponent } from './servicio/agregar-detalle/agregar-detalle.component';
 import { NuevoServicioComponent } from './servicio/nuevo-servicio/nuevo-servicio.component';
 import { ServicioComponent } from './servicio/servicio.component';
+<<<<<<< HEAD
 import { VerServicioComponent } from './servicio/ver-servicio/ver-servicio.component';
+=======
+import { ReporteComponent } from './reporte/reporte.component';
+>>>>>>> 8e1c7d2400834775fe3979a31d84b71237b81fc8
 
 const routes: Routes = [
   {
@@ -64,6 +68,10 @@ const routes: Routes = [
     component: AgregarDetalleComponent
   },
 
+    path: "reporte",
+    component: ReporteComponent
+  }
+  
 ];
 
 @NgModule({
