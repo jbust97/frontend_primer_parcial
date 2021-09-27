@@ -3,6 +3,7 @@ export class Persona {
     nombre!: string;
     apellido!: string;
     fullName!: string;
+    nombreCompleto!: string;
     email!: string;
     telefono!: string;
     ruc!: string;
