@@ -90,7 +90,7 @@ export class ModificarReservaComponent implements OnInit {
     this.reservaService.modificarReserva(reservaBody).subscribe(() => console.log('Se ha modificado la reserva!'));
   }
 
-  getReservas(idEmpleado: number, fecha: string) {
+  /*getReservas(idEmpleado: number, fecha: string) {
     let currentPage = this.config.currentPage;
     let itemsPerPage = this.config.itemsPerPage;
 
@@ -101,7 +101,7 @@ export class ModificarReservaComponent implements OnInit {
       .subscribe((data: Reserva[]) => {
         this.data = data;
       });
-  }
+  }*/
 
   pageChanged(event: number) {
     this.config.currentPage = event;
