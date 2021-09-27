@@ -16,6 +16,12 @@ export class ServicioPostBody {
     observacion!: string;
 }
 
+export class Detalle {
+    idServicioDetalle!: number;
+    idPresentacionProducto!: PresentacionProducto;
+    idServicio!: Servicio;
+}
+
 export class DetallePostBody {
     cantidad!: number;
     idPresentacionProducto!: Partial<PresentacionProducto>;
