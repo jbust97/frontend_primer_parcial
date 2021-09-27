@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { listadatos } from '../models/datos';
+import { Persona } from '../models/persona';
 import { Reserva } from "../models/reserva";
 import { ReservaService } from '../service/reserva.service';
+
+type Filtro = {
+  fechaDesde ?: string,
+  fechaHasta?: string,
+  idEmpleado?: number,
+  idCliente?: number,
+};
 
 @Component({
   selector: 'app-reserva',
@@ -18,7 +26,15 @@ export class ReservaComponent implements OnInit {
   }
   next = "Siguiente"
   back = "Atras"
-  constructor(private reservaService: ReservaService) { }
+  empleado: Persona = new Persona();
+  cliente: Persona = new Persona();
+  filtros: Filtro = {};
+  constructor(private reservaService: ReservaService) {
+    const today = new Date();
+    const todayString = `${today.getFullYear()}${today.getMonth() < 9 ? '0' : ''}${today.getMonth() + 1}${today.getDate() <= 9 ? '0' : ''}${today.getDate()}`;
+    this.filtros.fechaDesde = todayString;
+    this.filtros.fechaHasta = todayString;
+  }
 
   ngOnInit(): void {
     this.getReservas();
@@ -31,7 +47,7 @@ export class ReservaComponent implements OnInit {
     let inicio = currentPage - 1;
     inicio = inicio * itemsPerPage; 
 
-    this.reservaService.getReservas(itemsPerPage,inicio)
+    this.reservaService.getReservas(this.filtros, itemsPerPage,inicio)
     .subscribe((data:listadatos<Reserva>) => {
      this.data = data.lista;
      this.config.totalItems = data.totalDatos;
@@ -49,4 +65,21 @@ export class ReservaComponent implements OnInit {
     this.getReservas()
   }
 
+  seleccionarEmpleado(empleado: Persona){
+    this.empleado = empleado
+    this.empleado.fullName = empleado.nombre + " " + empleado.apellido;
+  }
+
+  seleccionarCliente(cliente: Persona){
+    this.cliente = cliente
+    this.cliente.fullName = cliente.nombre + " " + cliente.apellido;
+  }
+
+  buscar(): void{
+    this.config.currentPage = 1;
+    this.filtros.idCliente = this.cliente.idPersona;
+    this.filtros.idEmpleado = this.empleado.idPersona;
+
+    this.getReservas();  
+  }
 }
