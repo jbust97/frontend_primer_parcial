@@ -1,10 +1,9 @@
 {
-  
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rehabilitacion": {
+    "frontendFinal": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -18,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/rehabilitacion",
+            "outputPath": "dist/frontendFinal",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -33,9 +32,7 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/jspdf/dist/jspdf.umd.min.js",
-              "node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
@@ -75,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "rehabilitacion:build:production"
+              "browserTarget": "frontendFinal:build:production"
             },
             "development": {
-              "browserTarget": "rehabilitacion:build:development"
+              "browserTarget": "frontendFinal:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rehabilitacion:build"
+            "browserTarget": "frontendFinal:build"
           }
         },
         "test": {
@@ -109,5 +106,5 @@
       }
     }
   },
-  "defaultProject": "rehabilitacion"
+  "defaultProject": "frontendFinal"
 }

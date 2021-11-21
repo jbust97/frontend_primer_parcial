@@ -3,45 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ServicepersonaService } from './service/servicepersona.service';
+import { VentaComponent } from './venta/venta.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { ReporteVentaComponent } from './reporte-venta/reporte-venta.component';
 import { FormsModule } from '@angular/forms';
-import {NgxPaginationModule} from 'ngx-pagination';
-import { FichaComponent } from './ficha/ficha.component';
-import { NuevafichaComponent } from './ficha/nuevaficha/nuevaficha.component';
-import { BuscarempleadoComponent } from './buscarempleado/buscarempleado.component';
-import { BuscarclienteComponent } from './buscarcliente/buscarcliente.component';
-import { ReservaComponent } from './reserva/reserva.component';
-import { ServicioComponent } from './servicio/servicio.component';
-import { ModificarfichaComponent } from './ficha/modificarficha/modificarficha.component';
-import { ReporteComponent } from './reporte/reporte.component';
+import { ReporteVentaDetalladoComponent } from './reporte-venta-detallado/reporte-venta-detallado.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    FichaComponent,
-    NuevafichaComponent,
-    BuscarempleadoComponent,
-    BuscarclienteComponent,
-    ReservaComponent,
-    ServicioComponent,
-    ModificarfichaComponent,
-    ReporteComponent,
-
-    
-  ],
+  declarations: [AppComponent, VentaComponent, ReporteVentaComponent, ReporteVentaDetalladoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
     FormsModule,
-    NgxPaginationModule,
   ],
-  providers: [ServicepersonaService],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

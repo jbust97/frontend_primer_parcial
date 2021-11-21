@@ -1,0 +1,81 @@
+<div class="container">
+  <h1>Reporte de Ventas</h1>
+  <hr />
+  <div class="row">
+    <label for="basic-url" class="form-label">Cliente</label>
+    <div class="col-6">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">Ruc / Cedula</span>
+        <input
+          name="numeroDocumento"
+          type="text"
+          class="form-control"
+          id="basic-url"
+          aria-describedby="basic-addon3"
+          [(ngModel)]="numeroDocumento"
+        />
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="col-6 input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">Nombre</span>
+        <input
+          disabled
+          type="text"
+          class="form-control"
+          id="basic-url"
+          aria-describedby="basic-addon3"
+          [(ngModel)]="nombreCliente"
+        />
+      </div>
+    </div>
+
+    <label for="basic-url" class="form-label">Fecha de Venta</label>
+    <div class="col-6">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">Desde</span>
+        <input
+          type="date"
+          class="form-control"
+          id="basic-url"
+          aria-describedby="basic-addon3"
+          [(ngModel)]="fechaDesde"
+        />
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="col-6 input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">Hasta</span>
+        <input
+          type="date"
+          class="form-control"
+          id="basic-url"
+          aria-describedby="basic-addon3"
+          [(ngModel)]="fechaHasta"
+        />
+      </div>
+    </div>
+    <button (click)="getVentas()" class="btn btn-primary col-3 mx-auto mb-3">
+      Buscar
+    </button>
+    <hr />
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Numero de Factura</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let venta of listaVentas">
+        <tr>
+          <td>{{ venta.factura }}</td>
+          <td>{{ venta.cliente.nombreCompleto }}</td>
+          <td>{{ venta.fecha }}</td>
+          <td>{{ venta.total.toLocaleString() }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

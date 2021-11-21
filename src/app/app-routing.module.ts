@@ -1,53 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FichaComponent } from './ficha/ficha.component';
-import { ModificarfichaComponent } from './ficha/modificarficha/modificarficha.component';
-import { NuevafichaComponent } from './ficha/nuevaficha/nuevaficha.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { ReservaComponent } from './reserva/reserva.component';
-import { ServicioComponent } from './servicio/servicio.component';
-import { ReporteComponent } from './reporte/reporte.component';
+import { VentaComponent } from './venta/venta.component';
+import { ReporteVentaComponent } from './reporte-venta/reporte-venta.component';
+import { ReporteVentaDetalladoComponent } from './reporte-venta-detallado/reporte-venta-detallado.component';
 
 const routes: Routes = [
   {
-    path: "",
-    component: HomeComponent,
+    path: 'ventas',
+    component: VentaComponent,
   },
   {
-    path: "login",
-    component: LoginComponent
+    path: 'reporte-ventas',
+    component: ReporteVentaComponent,
   },
   {
-    path: "ficha/:id/editar",
-    component: ModificarfichaComponent
+    path: 'reporte-ventas-detallado',
+    component: ReporteVentaDetalladoComponent,
   },
-  {
-    path: "ficha/nuevo",
-    component: NuevafichaComponent
-  },
-  {
-    path: "ficha",
-    component: FichaComponent
-  },
-  
-  {
-    path: "reserva",
-    component: ReservaComponent
-  },
-  {
-    path: "servicio",
-    component: ServicioComponent
-  },
-  {
-    path: "reporte",
-    component: ReporteComponent
-  }
-  
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,0 +1,95 @@
+<div class="container">
+  <h1>Reporte de Ventas Detallado</h1>
+  <hr />
+  <div class="row">
+    <label for="basic-url" class="form-label">Producto</label>
+    <div class="col-6">
+      <select
+        class="form-control"
+        name="producto"
+        id="producto"
+        [(ngModel)]="producto"
+      >
+        <option selected value="">---</option>
+        <option
+          *ngFor="let producto of productosOptions"
+          [ngValue]="producto.codigo"
+        >
+          {{ producto.codigo }} - {{ producto.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <label for="basic-url" class="form-label">Fecha de Venta</label>
+    <div class="col-6">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">Desde</span>
+        <input
+          type="date"
+          class="form-control"
+          id="basic-url"
+          aria-describedby="basic-addon3"
+          [(ngModel)]="fechaDesde"
+        />
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="col-6 input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">Hasta</span>
+        <input
+          type="date"
+          class="form-control"
+          id="basic-url"
+          aria-describedby="basic-addon3"
+          [(ngModel)]="fechaHasta"
+        />
+      </div>
+    </div>
+    <button (click)="getVentas()" class="btn btn-primary col-3 mx-auto mb-3">
+      Buscar
+    </button>
+    <hr />
+
+    <div *ngFor="let venta of listaVentas; let i = index">
+      <div class="card" class="card m-3" (click)="onCardPress(i)">
+        <div class="row p-3">
+          <span class="col-4 h6">{{ venta.factura }}</span>
+          <span class="col-3 h6">{{ venta.cliente.nombreCompleto }}</span>
+          <span class="col-3 h6">{{ venta.fecha }}</span>
+          <div class="col-2 h6 text-right">Gs. {{ venta.total }}</div>
+
+          <span class="col-4 text-secondary" style="font-size: 12px"
+            >Numero de Factura</span
+          >
+          <span class="col-3 text-secondary" style="font-size: 12px"
+            >Nombre de Cliente</span
+          >
+          <span class="col-3 text-secondary" style="font-size: 12px"
+            >Fecha de Compra</span
+          >
+          <span class="col-2 text-secondary" style="font-size: 12px"
+            >Total</span
+          >
+        </div>
+        <div class="row p-3" *ngIf="i === selectedVenta">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let detalle of venta.detalles">
+              <tr>
+                <td>{{ detalle.producto.nombre }}</td>
+                <td>{{ detalle.cantidad }}</td>
+                <td>{{ detalle.totalDetalle }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
